@@ -1,0 +1,7 @@
+.DS_Store
+VPPDropDown.xcodeproj/xcuserdata/
+VPPDropDown.xcodeproj/project.xcworkspace/xcuserdata/
+build/
+VPPDropDown.xcodeproj/*.mode1v3
+VPPDropDown.xcodeproj/*.pbxuser
+
