@@ -1,0 +1,1209 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>VPPDropDown Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 752)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">VPPDropDown </a></h1>
+				<a id="developerHome" href="../index.html">Víctor Pena Placer</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">VPPDropDown Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
+	
+	<option value="//api/name/elements">&nbsp;&nbsp;&nbsp;&nbsp;elements</option>
+	
+	<option value="//api/name/expanded">&nbsp;&nbsp;&nbsp;&nbsp;expanded</option>
+	
+	<option value="//api/name/indexPath">&nbsp;&nbsp;&nbsp;&nbsp;indexPath</option>
+	
+	<option value="//api/name/numberOfRows">&nbsp;&nbsp;&nbsp;&nbsp;numberOfRows</option>
+	
+	<option value="//api/name/tableView">&nbsp;&nbsp;&nbsp;&nbsp;tableView</option>
+	
+	<option value="//api/name/title">&nbsp;&nbsp;&nbsp;&nbsp;title</option>
+	
+	<option value="//api/name/type">&nbsp;&nbsp;&nbsp;&nbsp;type</option>
+	
+	<option value="//api/name/usesEntireSection">&nbsp;&nbsp;&nbsp;&nbsp;usesEntireSection</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/cellForRowAtRelativeIndexPath:globalIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;- cellForRowAtRelativeIndexPath:globalIndexPath:</option>
+	
+	<option value="//api/name/containsRelativeIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;- containsRelativeIndexPath:</option>
+	
+	<option value="//api/name/didSelectRowAtRelativeIndexPath:globalIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;- didSelectRowAtRelativeIndexPath:globalIndexPath:</option>
+	
+	<option value="//api/name/initDisclosureWithTitle:tableView:indexPath:delegate:elementTitles:">&nbsp;&nbsp;&nbsp;&nbsp;- initDisclosureWithTitle:tableView:indexPath:delegate:elementTitles:</option>
+	
+	<option value="//api/name/initSelectionWithTitle:tableView:indexPath:delegate:selectedIndex:elementTitles:">&nbsp;&nbsp;&nbsp;&nbsp;- initSelectionWithTitle:tableView:indexPath:delegate:selectedIndex:elementTitles:</option>
+	
+	<option value="//api/name/initWithTitle:type:tableView:indexPath:elements:delegate:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithTitle:type:tableView:indexPath:elements:delegate:</option>
+	
+	<option value="//api/name/isRootCellAtRelativeIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;- isRootCellAtRelativeIndexPath:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Reading dropdown setup">Reading dropdown setup</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Reading dropdown status">Reading dropdown status</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Constructors">Constructors</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Table view data source">Table view data source</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Table view delegate">Table view delegate</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/elements">elements</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/expanded">expanded</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/indexPath">indexPath</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/numberOfRows">numberOfRows</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView">tableView</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/title">title</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/type">type</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/usesEntireSection">usesEntireSection</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cellForRowAtRelativeIndexPath:globalIndexPath:">cellForRowAtRelativeIndexPath:globalIndexPath:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/containsRelativeIndexPath:">containsRelativeIndexPath:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/didSelectRowAtRelativeIndexPath:globalIndexPath:">didSelectRowAtRelativeIndexPath:globalIndexPath:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initDisclosureWithTitle:tableView:indexPath:delegate:elementTitles:">initDisclosureWithTitle:tableView:indexPath:delegate:elementTitles:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initSelectionWithTitle:tableView:indexPath:delegate:selectedIndex:elementTitles:">initSelectionWithTitle:tableView:indexPath:delegate:selectedIndex:elementTitles:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithTitle:type:tableView:indexPath:elements:delegate:">initWithTitle:type:tableView:indexPath:elements:delegate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isRootCellAtRelativeIndexPath:">isRootCellAtRelativeIndexPath:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="VPPDropDown Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">VPPDropDown Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">VPPDropDown.h<br />VPPDropDown.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p><a href="VPPDropDown.html">VPPDropDown</a> is a library that allows you to create dropdowns-like menus in a
+table view, as seen in old Twitter 3 for iPhone.</p>
+
+<p>You can create three kinds of dropdown menus (<em>VPPDropDownType</em>):</p>
+
+<ul>
+<li><em>VPPDropDownTypeDisclosure</em>, childs of drop down cell are treated as disclosure cells,
+useful for grouping detailed view controllers.</li>
+<li><em>VPPDropDownTypeSelection</em>, childs of drop down cell are treated as selection cells,
+useful for editing preferences.</li>
+<li><em>VPPDropDownTypeCustom</em>, childs of drop down cell should be decorated by the <a href="#//api/name/delegate">delegate</a>.</li>
+</ul>
+
+
+<p>You can mix different dropdowns in the same or different section.</p>
+
+<h3>Relative index path</h3>
+
+<p>The concepts of relative index path and global index path are widely used in this library.
+Some method signatures require a relative index path, and some requires both index paths.</p>
+
+<p>What is exactly a relative index path? If in the table&rsquo;s section where the drop down
+will be placed are more drop downs, the relative index path&rsquo;s row is substraction
+of the number of rows in the precedent drop downs (using <em><a href="#//api/name/numberOfRows">numberOfRows</a></em> dropdown property)
+to the tableview indexpath&rsquo;s row.</p>
+
+<p>This relative index path is used to know which dropdown&rsquo;s child cell is been treated.</p>
+
+<p>The global index path is the tableview&rsquo;s index path itself.</p>
+
+<p>Checking the included sample application will clear these concepts.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						<a title="Reading dropdown setup" name="task_Reading dropdown setup"></a>
+						<h3 class="subsubtitle task-title">Reading dropdown setup</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/type">&nbsp;&nbsp;type</a></code>
+		<span class="tooltip"><p>Indicates the drop down <a href="#//api/name/type">type</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/elements">&nbsp;&nbsp;elements</a></code>
+		<span class="tooltip"><p>  <a href="../Classes/VPPDropDownElement.html">VPPDropDownElement</a> objects. They conform the dropdown&rsquo;s childs.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/title">&nbsp;&nbsp;title</a></code>
+		<span class="tooltip"><p>The root cell&rsquo;s <a href="#//api/name/title">title</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/indexPath">&nbsp;&nbsp;indexPath</a></code>
+		<span class="tooltip"><p>The root cell&rsquo;s <a href="#//api/name/indexPath">indexPath</a>. All childs will be placed after it.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/tableView">&nbsp;&nbsp;tableView</a></code>
+		<span class="tooltip"><p>The <a href="#//api/name/tableView">tableView</a> where the dropdown is.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>Holds a reference to the <a href="#//api/name/delegate">delegate</a></p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/usesEntireSection">&nbsp;&nbsp;usesEntireSection</a></code>
+		<span class="tooltip"><p>Tells the dropdown if it is using the entire tableView&rsquo;s section.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Reading dropdown status" name="task_Reading dropdown status"></a>
+						<h3 class="subsubtitle task-title">Reading dropdown status</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/expanded">&nbsp;&nbsp;expanded</a></code>
+		<span class="tooltip"><p>Indicates whether the dropdown is exanded or not.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Constructors" name="task_Constructors"></a>
+						<h3 class="subsubtitle task-title">Constructors</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithTitle:type:tableView:indexPath:elements:delegate:">&ndash;&nbsp;initWithTitle:type:tableView:indexPath:elements:delegate:</a></code>
+		<span class="tooltip"><p>Returns a newly initialized dropdown.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initDisclosureWithTitle:tableView:indexPath:delegate:elementTitles:">&ndash;&nbsp;initDisclosureWithTitle:tableView:indexPath:delegate:elementTitles:</a></code>
+		<span class="tooltip"><p>Returns a newly initialized disclosure dropdown.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initSelectionWithTitle:tableView:indexPath:delegate:selectedIndex:elementTitles:">&ndash;&nbsp;initSelectionWithTitle:tableView:indexPath:delegate:selectedIndex:elementTitles:</a></code>
+		<span class="tooltip"><p>Returns a newly initialized selection dropdown.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Table view data source" name="task_Table view data source"></a>
+						<h3 class="subsubtitle task-title">Table view data source</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/containsRelativeIndexPath:">&ndash;&nbsp;containsRelativeIndexPath:</a></code>
+		<span class="tooltip"><p>Indicates if the given relativeIndexPath is contained and managed by the
+dropdown</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isRootCellAtRelativeIndexPath:">&ndash;&nbsp;isRootCellAtRelativeIndexPath:</a></code>
+		<span class="tooltip"><p>Indicates if dropdown&rsquo;s root cell is placed in the given
+relativeIndexPath</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/numberOfRows">&nbsp;&nbsp;numberOfRows</a></code>
+		<span class="tooltip"><p>Indicates the visible number of rows.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/cellForRowAtRelativeIndexPath:globalIndexPath:">&ndash;&nbsp;cellForRowAtRelativeIndexPath:globalIndexPath:</a></code>
+		<span class="tooltip"><p>Returns the corresponding cell for the given parameters.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Table view delegate" name="task_Table view delegate"></a>
+						<h3 class="subsubtitle task-title">Table view delegate</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/didSelectRowAtRelativeIndexPath:globalIndexPath:">&ndash;&nbsp;didSelectRowAtRelativeIndexPath:globalIndexPath:</a></code>
+		<span class="tooltip"><p>Indicates the dropdown the corresponding cell for the given parameters
+has been selected.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Holds a reference to the <a href="#//api/name/delegate">delegate</a></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) id&lt;VPPDropDownDelegate&gt; delegate</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/elements" title="elements"></a>
+	<h3 class="subsubtitle method-title">elements</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>  <a href="../Classes/VPPDropDownElement.html">VPPDropDownElement</a> objects. They conform the dropdown&rsquo;s childs.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSArray *elements</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/expanded" title="expanded"></a>
+	<h3 class="subsubtitle method-title">expanded</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Indicates whether the dropdown is exanded or not.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, getter=isExpanded) BOOL expanded</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/indexPath" title="indexPath"></a>
+	<h3 class="subsubtitle method-title">indexPath</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The root cell&rsquo;s <a href="#//api/name/indexPath">indexPath</a>. All childs will be placed after it.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSIndexPath *indexPath</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/numberOfRows" title="numberOfRows"></a>
+	<h3 class="subsubtitle method-title">numberOfRows</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Indicates the visible number of rows.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) int numberOfRows</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>If the dropdown is contracted, <a href="#//api/name/numberOfRows">numberOfRows</a> will be 0. Otherwise,
+<a href="#//api/name/numberOfRows">numberOfRows</a> will be the count of <a href="#//api/name/elements">elements</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/tableView" title="tableView"></a>
+	<h3 class="subsubtitle method-title">tableView</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The <a href="#//api/name/tableView">tableView</a> where the dropdown is.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) UITableView *tableView</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/title" title="title"></a>
+	<h3 class="subsubtitle method-title">title</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The root cell&rsquo;s <a href="#//api/name/title">title</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSString *title</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/type" title="type"></a>
+	<h3 class="subsubtitle method-title">type</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Indicates the drop down <a href="#//api/name/type">type</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) VPPDropDownType type</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Type can be:</p>
+
+<ul>
+<li><em>VPPDropDownTypeDisclosure</em>, childs of drop down cell are treated as disclosure cells,
+useful for grouping detailed view controllers.</li>
+<li><em>VPPDropDownTypeSelection</em>, childs of drop down cell are treated as selection cells,
+useful for editing preferences.</li>
+<li><em>VPPDropDownTypeCustom</em>, childs of drop down cell should be decorated by the <a href="#//api/name/delegate">delegate</a>.</li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/usesEntireSection" title="usesEntireSection"></a>
+	<h3 class="subsubtitle method-title">usesEntireSection</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Tells the dropdown if it is using the entire tableView&rsquo;s section.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL usesEntireSection</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This changes the expanding/contracting animation.</p>
+
+<ul>
+<li>If <a href="#//api/name/usesEntireSection">usesEntireSection</a> is set to YES, expanding/contracting will be done
+by inserting/removing cells.</li>
+<li>Otherwise, expanding/contracting will be done refreshing the section.</li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/cellForRowAtRelativeIndexPath:globalIndexPath:" title="cellForRowAtRelativeIndexPath:globalIndexPath:"></a>
+	<h3 class="subsubtitle method-title">cellForRowAtRelativeIndexPath:globalIndexPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the corresponding cell for the given parameters.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (UITableViewCell *)cellForRowAtRelativeIndexPath:(NSIndexPath *)<em>relativeIndexPath</em> globalIndexPath:(NSIndexPath *)<em>globalIndexPath</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/containsRelativeIndexPath:" title="containsRelativeIndexPath:"></a>
+	<h3 class="subsubtitle method-title">containsRelativeIndexPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Indicates if the given relativeIndexPath is contained and managed by the
+dropdown</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)containsRelativeIndexPath:(NSIndexPath *)<em>relativeIndexPath</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/didSelectRowAtRelativeIndexPath:globalIndexPath:" title="didSelectRowAtRelativeIndexPath:globalIndexPath:"></a>
+	<h3 class="subsubtitle method-title">didSelectRowAtRelativeIndexPath:globalIndexPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Indicates the dropdown the corresponding cell for the given parameters
+has been selected.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)didSelectRowAtRelativeIndexPath:(NSIndexPath *)<em>relativeIndexPath</em> globalIndexPath:(NSIndexPath *)<em>globalIndexPath</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initDisclosureWithTitle:tableView:indexPath:delegate:elementTitles:" title="initDisclosureWithTitle:tableView:indexPath:delegate:elementTitles:"></a>
+	<h3 class="subsubtitle method-title">initDisclosureWithTitle:tableView:indexPath:delegate:elementTitles:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a newly initialized disclosure dropdown.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (VPPDropDown *)initDisclosureWithTitle:(NSString *)<em>title</em> tableView:(UITableView *)<em>tableView</em> indexPath:(NSIndexPath *)<em>indexPath</em> delegate:(id&lt;VPPDropDownDelegate&gt;)<em>delegate</em> elementTitles:(NSString *)<em>firstObject</em>, <em>...</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>title</em></dt>
+			<dd><p>Indicates the <a href="#//api/name/title">title</a> of the root cell.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tableView</em></dt>
+			<dd><p>The <a href="#//api/name/tableView">tableView</a> where the dropdown will be placed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>indexPath</em></dt>
+			<dd><p>The tableView&rsquo;s <a href="#//api/name/indexPath">indexPath</a> where the dropdown will be placed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>A reference to the <a href="#//api/name/delegate">delegate</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>firstObject,</em></dt>
+			<dd><p>&hellip; A comma-separated list of strings ending with <code>nil</code>.
+It represents the titles of all dropdown&rsquo;s childs.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initSelectionWithTitle:tableView:indexPath:delegate:selectedIndex:elementTitles:" title="initSelectionWithTitle:tableView:indexPath:delegate:selectedIndex:elementTitles:"></a>
+	<h3 class="subsubtitle method-title">initSelectionWithTitle:tableView:indexPath:delegate:selectedIndex:elementTitles:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a newly initialized selection dropdown.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (VPPDropDown *)initSelectionWithTitle:(NSString *)<em>title</em> tableView:(UITableView *)<em>tableView</em> indexPath:(NSIndexPath *)<em>indexPath</em> delegate:(id&lt;VPPDropDownDelegate&gt;)<em>delegate</em> selectedIndex:(int)<em>selectedIndex</em> elementTitles:(NSString *)<em>firstObject</em>, <em>...</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>title</em></dt>
+			<dd><p>Indicates the <a href="#//api/name/title">title</a> of the root cell.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tableView</em></dt>
+			<dd><p>The <a href="#//api/name/tableView">tableView</a> where the dropdown will be placed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>indexPath</em></dt>
+			<dd><p>The tableView&rsquo;s <a href="#//api/name/indexPath">indexPath</a> where the dropdown will be placed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>A reference to the <a href="#//api/name/delegate">delegate</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>selectedIndex</em></dt>
+			<dd><p>The initial selected index.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>firstObject,</em></dt>
+			<dd><p>&hellip; A comma-separated list of strings ending with <code>nil</code>.
+It represents the titles of all dropdown&rsquo;s childs.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithTitle:type:tableView:indexPath:elements:delegate:" title="initWithTitle:type:tableView:indexPath:elements:delegate:"></a>
+	<h3 class="subsubtitle method-title">initWithTitle:type:tableView:indexPath:elements:delegate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a newly initialized dropdown.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (VPPDropDown *)initWithTitle:(NSString *)<em>title</em> type:(VPPDropDownType)<em>type</em> tableView:(UITableView *)<em>tableView</em> indexPath:(NSIndexPath *)<em>indexPath</em> elements:(NSArray *)<em>elements</em> delegate:(id&lt;VPPDropDownDelegate&gt;)<em>delegate</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>title</em></dt>
+			<dd><p>Indicates the <a href="#//api/name/title">title</a> of the root cell.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>type</em></dt>
+			<dd><p>Should be one of:</p>
+
+<ul>
+<li><em>VPPDropDownTypeDisclosure</em>, childs of drop down cell are treated as disclosure cells,
+useful for grouping detailed view controllers.</li>
+<li><em>VPPDropDownTypeSelection</em>, childs of drop down cell are treated as selection cells,
+useful for editing preferences.</li>
+<li><em>VPPDropDownTypeCustom</em>, childs of drop down cell should be decorated by the <a href="#//api/name/delegate">delegate</a>.</li>
+</ul>
+</dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tableView</em></dt>
+			<dd><p>The <a href="#//api/name/tableView">tableView</a> where the dropdown will be placed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>indexPath</em></dt>
+			<dd><p>The tableView&rsquo;s <a href="#//api/name/indexPath">indexPath</a> where the dropdown will be placed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>elements</em></dt>
+			<dd><p>An array of <a href="../Classes/VPPDropDownElement.html">VPPDropDownElement</a> objects. They will conform the dropdown&rsquo;s childs.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>A reference to the <a href="#//api/name/delegate">delegate</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This is the designated initializer.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isRootCellAtRelativeIndexPath:" title="isRootCellAtRelativeIndexPath:"></a>
+	<h3 class="subsubtitle method-title">isRootCellAtRelativeIndexPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Indicates if dropdown&rsquo;s root cell is placed in the given
+relativeIndexPath</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)isRootCellAtRelativeIndexPath:(NSIndexPath *)<em>relativeIndexPath</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Víctor Pena Placer. All rights reserved. (Last updated: 2012-01-24)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 752)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>
