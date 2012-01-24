@@ -49,6 +49,9 @@ typedef enum {
  The global index path is the tableview's index path itself.
  
  Checking the included sample application will clear these concepts.
+ 
+ @warning If there is only one dropdown per section, relativeIndexPath and 
+ globalIndexPath have the same value.
  */
 
 @interface VPPDropDown : NSObject {
