@@ -127,7 +127,6 @@ typedef enum {
 
 
 
-
 /** ---
  @name Constructors
  */
@@ -204,6 +203,11 @@ typedef enum {
                            elementTitles:(NSString *)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
 
 
+/** --
+ @name Storing data
+ */
+/** This property stores custom data. Use it to store any information you want. */
+@property (nonatomic, retain) id object;
 
 
 /** ---

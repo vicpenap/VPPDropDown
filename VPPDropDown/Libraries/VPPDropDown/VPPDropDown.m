@@ -23,6 +23,7 @@
 @synthesize expanded=_expanded;
 @synthesize tableView=_tableView;
 @synthesize usesEntireSection;
+@synthesize object;
 
 + (UIColor *) detailColor {
     float R = CUSTOM_DETAILED_LABEL_COLOR_R/255.0;
@@ -56,6 +57,7 @@
 
 
 - (void) dealloc {
+    self.object = nil;
     if (_title != nil) {
         [_title release];
         _title = nil;
