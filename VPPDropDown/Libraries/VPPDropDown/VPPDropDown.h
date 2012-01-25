@@ -124,6 +124,12 @@ typedef enum {
 @property (nonatomic, readonly, getter = isExpanded) BOOL expanded;
 
 
+/** ---
+ @name Storing data
+ */
+ 
+/** This property stores custom data. Use it to store any information you want. */
+@property (nonatomic, retain) id object;
 
 
 
@@ -201,13 +207,6 @@ typedef enum {
                                 delegate:(id<VPPDropDownDelegate>)delegate 
                            selectedIndex:(int)selectedIndex
                            elementTitles:(NSString *)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
-
-
-/** --
- @name Storing data
- */
-/** This property stores custom data. Use it to store any information you want. */
-@property (nonatomic, retain) id object;
 
 
 /** ---
