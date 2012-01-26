@@ -23,14 +23,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5721946B14CF04FE00C15760 /* VPPDropDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPPDropDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5721946B14CF04FE00C15760 /* VPPDropDownExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPPDropDownExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5721946F14CF04FE00C15760 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5721947114CF04FE00C15760 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5721947314CF04FE00C15760 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		5721947714CF04FF00C15760 /* VPPDropDown-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VPPDropDown-Info.plist"; sourceTree = "<group>"; };
+		5721947714CF04FF00C15760 /* VPPDropDownExample-Info.plist */ = {isa = PBXFileReference; path = "VPPDropDownExample-Info.plist"; sourceTree = "<group>"; };
 		5721947914CF04FF00C15760 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5721947B14CF04FF00C15760 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5721947D14CF04FF00C15760 /* VPPDropDown-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VPPDropDown-Prefix.pch"; sourceTree = "<group>"; };
+		5721947D14CF04FF00C15760 /* VPPDropDownExample-Prefix.pch */ = {isa = PBXFileReference; path = "VPPDropDownExample-Prefix.pch"; sourceTree = "<group>"; };
 		5721947E14CF04FF00C15760 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5721947F14CF04FF00C15760 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5721948614CF055100C15760 /* DropDownExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownExample.h; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 		5721946014CF04FE00C15760 = {
 			isa = PBXGroup;
 			children = (
-				5721947514CF04FF00C15760 /* VPPDropDown */,
+				5721947514CF04FF00C15760 /* VPPDropDownExample */,
 				5721946E14CF04FE00C15760 /* Frameworks */,
 				5721946C14CF04FE00C15760 /* Products */,
 			);
@@ -72,7 +72,7 @@
 		5721946C14CF04FE00C15760 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5721946B14CF04FE00C15760 /* VPPDropDown.app */,
+				5721946B14CF04FE00C15760 /* VPPDropDownExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5721947514CF04FF00C15760 /* VPPDropDown */ = {
+		5721947514CF04FF00C15760 /* VPPDropDownExample */ = {
 			isa = PBXGroup;
 			children = (
 				5721948914CF07C500C15760 /* Libraries */,
@@ -97,16 +97,16 @@
 				5721947F14CF04FF00C15760 /* AppDelegate.m */,
 				5721947614CF04FF00C15760 /* Supporting Files */,
 			);
-			path = VPPDropDown;
+			path = VPPDropDownExample;
 			sourceTree = "<group>";
 		};
 		5721947614CF04FF00C15760 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5721947714CF04FF00C15760 /* VPPDropDown-Info.plist */,
+				5721947714CF04FF00C15760 /* VPPDropDownExample-Info.plist */,
 				5721947814CF04FF00C15760 /* InfoPlist.strings */,
 				5721947B14CF04FF00C15760 /* main.m */,
-				5721947D14CF04FF00C15760 /* VPPDropDown-Prefix.pch */,
+				5721947D14CF04FF00C15760 /* VPPDropDownExample-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -138,9 +138,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5721946A14CF04FE00C15760 /* VPPDropDown */ = {
+		5721946A14CF04FE00C15760 /* VPPDropDownExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5721948314CF04FF00C15760 /* Build configuration list for PBXNativeTarget "VPPDropDown" */;
+			buildConfigurationList = 5721948314CF04FF00C15760 /* Build configuration list for PBXNativeTarget "VPPDropDownExample" */;
 			buildPhases = (
 				5721946714CF04FE00C15760 /* Sources */,
 				5721946814CF04FE00C15760 /* Frameworks */,
@@ -150,9 +150,9 @@
 			);
 			dependencies = (
 			);
-			name = VPPDropDown;
+			name = VPPDropDownExample;
 			productName = VPPDropDown;
-			productReference = 5721946B14CF04FE00C15760 /* VPPDropDown.app */;
+			productReference = 5721946B14CF04FE00C15760 /* VPPDropDownExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -163,7 +163,7 @@
 			attributes = {
 				LastUpgradeCheck = 0420;
 			};
-			buildConfigurationList = 5721946514CF04FE00C15760 /* Build configuration list for PBXProject "VPPDropDown" */;
+			buildConfigurationList = 5721946514CF04FE00C15760 /* Build configuration list for PBXProject "VPPDropDownExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -175,7 +175,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5721946A14CF04FE00C15760 /* VPPDropDown */,
+				5721946A14CF04FE00C15760 /* VPPDropDownExample */,
 			);
 		};
 /* End PBXProject section */
@@ -269,10 +269,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VPPDropDown/VPPDropDown-Prefix.pch";
-				INFOPLIST_FILE = "VPPDropDown/VPPDropDown-Info.plist";
+				GCC_PREFIX_HEADER = "VPPDropDown/VPPDropDownExample-Prefix.pch";
+				INFOPLIST_FILE = "VPPDropDown/VPPDropDownExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = VPPDropDownExample;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -281,10 +281,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VPPDropDown/VPPDropDown-Prefix.pch";
-				INFOPLIST_FILE = "VPPDropDown/VPPDropDown-Info.plist";
+				GCC_PREFIX_HEADER = "VPPDropDown/VPPDropDownExample-Prefix.pch";
+				INFOPLIST_FILE = "VPPDropDown/VPPDropDownExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = VPPDropDownExample;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -292,7 +292,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5721946514CF04FE00C15760 /* Build configuration list for PBXProject "VPPDropDown" */ = {
+		5721946514CF04FE00C15760 /* Build configuration list for PBXProject "VPPDropDownExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5721948114CF04FF00C15760 /* Debug */,
@@ -301,13 +301,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5721948314CF04FF00C15760 /* Build configuration list for PBXNativeTarget "VPPDropDown" */ = {
+		5721948314CF04FF00C15760 /* Build configuration list for PBXNativeTarget "VPPDropDownExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5721948414CF04FF00C15760 /* Debug */,
 				5721948514CF04FF00C15760 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
