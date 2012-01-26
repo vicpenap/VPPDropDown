@@ -133,7 +133,7 @@
 				5721949314CF07C500C15760 /* VPPDropDownElement.m */,
 			);
 			path = VPPDropDown;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
