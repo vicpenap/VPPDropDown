@@ -27,10 +27,10 @@
 		5721946F14CF04FE00C15760 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5721947114CF04FE00C15760 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5721947314CF04FE00C15760 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		5721947714CF04FF00C15760 /* VPPDropDownExample-Info.plist */ = {isa = PBXFileReference; path = "VPPDropDownExample-Info.plist"; sourceTree = "<group>"; };
+		5721947714CF04FF00C15760 /* VPPDropDownExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VPPDropDownExample-Info.plist"; sourceTree = "<group>"; };
 		5721947914CF04FF00C15760 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5721947B14CF04FF00C15760 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5721947D14CF04FF00C15760 /* VPPDropDownExample-Prefix.pch */ = {isa = PBXFileReference; path = "VPPDropDownExample-Prefix.pch"; sourceTree = "<group>"; };
+		5721947D14CF04FF00C15760 /* VPPDropDownExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VPPDropDownExample-Prefix.pch"; sourceTree = "<group>"; };
 		5721947E14CF04FF00C15760 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5721947F14CF04FF00C15760 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5721948614CF055100C15760 /* DropDownExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownExample.h; sourceTree = "<group>"; };
@@ -241,6 +241,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "VPPDropDownExample/VPPDropDownExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
@@ -258,6 +259,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "VPPDropDownExample/VPPDropDownExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
@@ -269,8 +271,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VPPDropDown/VPPDropDownExample-Prefix.pch";
-				INFOPLIST_FILE = "VPPDropDown/VPPDropDownExample-Info.plist";
+				GCC_PREFIX_HEADER = "VPPDropDownExample/VPPDropDownExample-Prefix.pch";
+				INFOPLIST_FILE = "VPPDropDownExample/VPPDropDownExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = VPPDropDownExample;
 				WRAPPER_EXTENSION = app;
@@ -281,8 +283,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VPPDropDown/VPPDropDownExample-Prefix.pch";
-				INFOPLIST_FILE = "VPPDropDown/VPPDropDownExample-Info.plist";
+				GCC_PREFIX_HEADER = "VPPDropDownExample/VPPDropDownExample-Prefix.pch";
+				INFOPLIST_FILE = "VPPDropDownExample/VPPDropDownExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = VPPDropDownExample;
 				WRAPPER_EXTENSION = app;
