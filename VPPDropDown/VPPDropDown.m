@@ -25,12 +25,90 @@
 @synthesize usesEntireSection;
 @synthesize object;
 
+
+/* a dictionary of tableviews (keys) and a dictionary of sections nsnumbered (values)
+ each dictionary of sections will hold the section nsnumbered (key) and its current
+ number of rows nsnumbered (value).
+ 
+ PAY ATTENTION: it doesn't include the root cell in the count.
+ */
+static NSMutableDictionary *numberOfRows = nil;
+
+/* a dictionary of dropdowns (keys) and the number of cells opened of the 
+ previous dropdowns (value). */
+static NSMutableDictionary *previousOpenedCells = nil;
+
+/* a dictionary of tableviews (keys) and a dictionary of sections nsnumbered (values)
+ each dictionary of sections will hold the section nsnumbered (key) and an array
+ of dropdowns (value). */
+static NSMutableDictionary *dropDowns = nil;
+
+
+#pragma mark - Managing dropDowns collection
+
++ (void) addNumberOfRows:(int)nnumberOfRows forSection:(int)section inTableView:(UITableView *)tableView {
+    if (!numberOfRows) {
+        numberOfRows = [[NSMutableDictionary alloc] init];
+    }
+    
+    NSMutableDictionary *sections = [numberOfRows objectForKey:[NSNumber numberWithInt:[tableView hash]]];
+    if (!sections) {
+        sections = [NSMutableDictionary dictionary];
+    }    
+    
+    
+    NSNumber *n = [sections objectForKey:[NSNumber numberWithInt:section]];
+    if (!n) {
+        n = [NSNumber numberWithInt:0];
+    }
+    n = [NSNumber numberWithInt:[n intValue]+nnumberOfRows];
+    [sections setObject:n forKey:[NSNumber numberWithInt:section]];
+    [numberOfRows setObject:sections forKey:[NSNumber numberWithInt:[tableView hash]]];
+}
+
++ (void) addDropDown:(VPPDropDown *)dropdown {
+    if (!dropDowns) {
+        dropDowns = [[NSMutableDictionary alloc] init]; 
+    }
+    
+    NSMutableDictionary *sections = [dropDowns objectForKey:[NSNumber numberWithInt:[dropdown.tableView hash]]];
+    if (!sections) {
+        sections = [NSMutableDictionary dictionary];
+    }
+    NSMutableArray *dropdowns = [sections objectForKey:[NSNumber numberWithInt:dropdown.indexPath.section]];
+    if (!dropdowns) {
+        dropdowns = [NSMutableArray array];
+    }
+    if (![dropdowns containsObject:dropdown]) {
+        [dropdowns addObject:dropdown];
+        
+        [sections setObject:dropdowns forKey:[NSNumber numberWithInt:dropdown.indexPath.section]];
+        [dropDowns setObject:sections forKey:[NSNumber numberWithInt:[dropdown.tableView hash]]];
+        
+//        [VPPDropDown addNumberOfRows:1 forSection:dropdown.indexPath.section inTableView:dropdown.tableView];
+    }
+}
+
+
+
+#pragma mark - Utilities
+
 + (UIColor *) detailColor {
     float R = CUSTOM_DETAILED_LABEL_COLOR_R/255.0;
     float G = CUSTOM_DETAILED_LABEL_COLOR_G/255.0;
     float B = CUSTOM_DETAILED_LABEL_COLOR_B/255.0;
     
     return [UIColor colorWithRed:R green:G blue:B alpha:1.0];
+}
+
+- (NSUInteger) hash {
+    int prime = 31;
+    int result = 1;
+    
+    result = prime * result + [self.indexPath hash];
+    result = prime * result + [self.tableView hash];
+    
+    return result;
 }
 
 #pragma mark -
@@ -50,6 +128,8 @@
         _delegate = [delegate retain];
         _rootIndexPath = [indexPath retain];
         _tableView = [tableView retain];
+        
+        [VPPDropDown addDropDown:self];
     }
     
     return self;
@@ -187,6 +267,14 @@
 
 #pragma mark -
 #pragma mark Table View Data Source
+
+// PAY ATTENTION: numberOfRows doesn't include the root cell in the count.
++ (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSMutableDictionary *d = [numberOfRows objectForKey:[NSNumber numberWithInt:[tableView hash]]];
+    NSNumber *n = [d objectForKey:[NSNumber numberWithInt:section]];
+    
+    return [n intValue];
+}
 
 - (int) numberOfRows {
     int tmp = 0; // root cell is not counted
@@ -348,6 +436,13 @@
 - (void) toggleDropDown {
     _expanded = !_expanded;
 
+    int rowsToAdd = [self.elements count];
+    if (!_expanded) {
+        rowsToAdd = -1 * rowsToAdd;
+    }
+    [VPPDropDown addNumberOfRows:rowsToAdd forSection:self.indexPath.section inTableView:self.tableView];
+
+
     NSMutableArray *indexPaths = [NSMutableArray array];
     for (int i = 1; i <= [_elements count]; i++) {
         NSIndexPath *ip = [NSIndexPath indexPathForRow:_rootIndexPath.row+i inSection:_rootIndexPath.section];
@@ -355,14 +450,14 @@
     }
     
     if (self.usesEntireSection) {
-        // we can add or 
+        // we can add or remove the cells as we manage the entire section
         if (_expanded) {
-            // table view insert rows at index paths blah
+            // table view insert rows
             [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
         }
         
         else {
-            // table view remove rows at index paths blah
+            // table view remove rows
             [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];        
         }
         
@@ -370,6 +465,7 @@
     }
 
     else {
+        // as we dont manage the section, just refresh it, no additions or removals
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:_rootIndexPath.section];
         [_tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
     }

@@ -213,6 +213,16 @@ typedef enum {
  @name Table view data source
  */
 
+/** Returns the current number of expanded cells for any dropdown included in 
+ the given section of the given table.
+ 
+ **Important** the returned number doesn't take into account any root cell.
+ 
+ @warning **Example** for a dropdown with three child rows, if the dropdown is 
+ expanded the returned value will be three. Otherwise it will be zero.
+*/
++ (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+
 
 /** Indicates if the given relativeIndexPath is contained and managed by the
  dropdown */

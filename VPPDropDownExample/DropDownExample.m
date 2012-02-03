@@ -20,7 +20,7 @@ enum {
 /* set to 2 if you want to see how it behaves 
  when having more cells in the same section 
  */
-#define kNumberOfRowsInSection1 3 
+#define kNumberOfRowsInSection1 2 
 
 enum {
     kRowDropDownSelection = 0,
@@ -179,14 +179,15 @@ enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    int rows = [VPPDropDown tableView:tableView numberOfRowsInSection:section];
     switch (section) {
         case kSection1:
-            return kNumberOfRowsInSection1+[_dropDownSelection numberOfRows]+[_dropDownDisclosure numberOfRows];
+            rows += kNumberOfRowsInSection1;
         case kSection2:
-            return kNumberOfRowsInSection2+[_dropDownCustom numberOfRows];
+            rows += kNumberOfRowsInSection2;
             
     }
-    return 0;
+    return rows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
