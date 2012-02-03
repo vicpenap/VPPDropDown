@@ -221,7 +221,7 @@ typedef enum {
  @warning **Example** for a dropdown with three child rows, if the dropdown is 
  expanded the returned value will be three. Otherwise it will be zero.
 */
-+ (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
++ (NSInteger)tableView:(UITableView *)tableView numberOfExpandedRowsInSection:(NSInteger)section;
 
 
 /** Indicates if the given relativeIndexPath is contained and managed by the

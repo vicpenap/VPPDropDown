@@ -269,7 +269,7 @@ static NSMutableDictionary *dropDowns = nil;
 #pragma mark Table View Data Source
 
 // PAY ATTENTION: numberOfRows doesn't include the root cell in the count.
-+ (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
++ (NSInteger)tableView:(UITableView *)tableView numberOfExpandedRowsInSection:(NSInteger)section {
     NSMutableDictionary *d = [numberOfRows objectForKey:[NSNumber numberWithInt:[tableView hash]]];
     NSNumber *n = [d objectForKey:[NSNumber numberWithInt:section]];
     

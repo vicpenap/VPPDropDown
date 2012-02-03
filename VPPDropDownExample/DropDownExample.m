@@ -179,7 +179,7 @@ enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    int rows = [VPPDropDown tableView:tableView numberOfRowsInSection:section];
+    int rows = [VPPDropDown tableView:tableView numberOfExpandedRowsInSection:section];
     switch (section) {
         case kSection1:
             rows += kNumberOfRowsInSection1;
