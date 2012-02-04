@@ -36,6 +36,9 @@ typedef enum {
  
  ### Relative index path
  
+ If you are using any of the relative index path deprecated methods, you should read this. 
+ Otherwise, skip it.
+ 
  The concepts of relative index path and global index path are widely used in this library. 
  Some method signatures require a relative index path, and some requires both index paths.
  
@@ -229,7 +232,9 @@ typedef enum {
 */
 + (NSInteger) tableView:(UITableView *)tableView numberOfExpandedRowsInSection:(NSInteger)section;
 
-/** Returns the corresponding cell for the given parameters. */
+/** Returns the corresponding cell for the given parameters.
+ 
+ LIbrary will automatically set up the cell according to the corresponding dropdown. */
 + (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 
@@ -244,19 +249,19 @@ typedef enum {
 /** **Deprecated** Indicates if the given relativeIndexPath is contained and managed by the
  dropdown.
  
- **Deprecated** Use tableView:dropdownsContainIndexPath: instead. */
-- (BOOL) containsRelativeIndexPath:(NSIndexPath *)relativeIndexPath;
+ @bug **Deprecated** Use tableView:dropdownsContainIndexPath: instead. */
+- (BOOL) containsRelativeIndexPath:(NSIndexPath *)relativeIndexPath __attribute__ ((deprecated));
 
 /** **Deprecated** Indicates if dropdown's root cell is placed in the given
  relativeIndexPath */
-- (BOOL) isRootCellAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath;
+- (BOOL) isRootCellAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath __attribute__ ((deprecated));
 
 /** 
  **Deprecated** Returns the corresponding cell for the given parameters. 
  
- **Deprecated** Use tableView:cellForRowAtIndexPath: instead.
+ @bug **Deprecated** Use tableView:cellForRowAtIndexPath: instead.
  */
-- (UITableViewCell *) cellForRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath globalIndexPath:(NSIndexPath *)globalIndexPath;
+- (UITableViewCell *) cellForRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath globalIndexPath:(NSIndexPath *)globalIndexPath __attribute__ ((deprecated));
 
 
 
@@ -264,6 +269,12 @@ typedef enum {
 /** ---
  @name Table view delegate
  */
+
+/** Indicates that the specified indexPath has been selected. 
+ 
+ Library will automatically notify the dropdown containing the selected row. */
++ (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
 
 /** **Deprecated** Indicates the dropdown the corresponding cell for the given parameters 
  has been selected. */

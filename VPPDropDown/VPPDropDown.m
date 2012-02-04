@@ -511,6 +511,58 @@ static NSMutableDictionary *dropDowns = nil;
 
 
 
+- (void) disclosureDidSelectRowAtIndexPath:(NSIndexPath *)globalIndexPath {
+    NSIndexPath *iPath = [self convertIndexPath:globalIndexPath];
+    
+    // delegate would do whatever it wants: change nspreference, ...
+    [_delegate dropDown:self elementSelected:[_elements objectAtIndex:iPath.row-1] atGlobalIndexPath:globalIndexPath];
+}
+
+- (void) selectionDidSelectRowAtIndexPath:(NSIndexPath *)globalIndexPath {
+    NSIndexPath *iPath = [self convertIndexPath:globalIndexPath];
+    NSIndexPath *previousSelectedItem = [NSIndexPath indexPathForRow:_selectedIndex+1 inSection:globalIndexPath.section];
+    
+    _selectedIndex = iPath.row-1;
+    
+    // delegate would do whatever it wants: change nspreference, ...
+    [_delegate dropDown:self elementSelected:[_elements objectAtIndex:_selectedIndex] atGlobalIndexPath:globalIndexPath];
+    
+    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:previousSelectedItem, _rootIndexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:globalIndexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+
+
+
+
++ (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)globalIndexPath {
+    if ([VPPDropDown tableView:tableView dropdownsContainIndexPath:globalIndexPath]) {
+        VPPDropDown *dd = [VPPDropDown tableView:tableView dropdownForIndexPath:globalIndexPath];
+        if ([dd convertIndexPath:globalIndexPath].row == 0) {
+            // we are on root cell
+            [dd toggleDropDown];
+        }
+        
+        else {
+            switch (dd->_type) {
+                case VPPDropDownTypeCustom: // at this time, clicking on custom dropdown does the same thing than clicking on disclosure
+                case VPPDropDownTypeDisclosure:
+                    [dd disclosureDidSelectRowAtIndexPath:globalIndexPath];
+                    break;
+                case VPPDropDownTypeSelection:
+                    [dd selectionDidSelectRowAtIndexPath:globalIndexPath];
+                    [tableView deselectRowAtIndexPath:globalIndexPath animated:YES];
+                    break;
+            }
+        }
+    }
+    
+    else {
+        NSLog(@"VPPDropDown - Receveing actions about an unknown cell");
+    }
+}
+
+
 #pragma mark - Deprecated methods
 
 - (BOOL) containsRelativeIndexPath:(NSIndexPath *)indexPath {
@@ -523,7 +575,8 @@ static NSMutableDictionary *dropDowns = nil;
 }
 
 - (NSIndexPath *) convertRelativeIndexPath:(NSIndexPath *)indexPath {
-    if (![self containsRelativeIndexPath:indexPath]) {
+        //casting to id to supress deprecated warnings
+    if (![(id)self containsRelativeIndexPath:indexPath]) {
         return nil;
     }
     
@@ -711,7 +764,8 @@ static NSMutableDictionary *dropDowns = nil;
 
 - (void) didSelectRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath
                          globalIndexPath:(NSIndexPath *)globalIndexPath {
-    if ([self containsRelativeIndexPath:relativeIndexPath]) {
+        //casting to id to supress deprecated warnings
+    if ([(id)self containsRelativeIndexPath:relativeIndexPath]) {
         if ([self convertRelativeIndexPath:relativeIndexPath].row == 0) {
             // we are on root cell
             [self toggleDropDown];

@@ -283,19 +283,18 @@ enum {
      [detailViewController release];
      */
 
+    
     // first check if any dropdown contains the requested cell
+    if ([VPPDropDown tableView:tableView dropdownsContainIndexPath:indexPath]) {
+        [VPPDropDown tableView:tableView didSelectRowAtIndexPath:indexPath];
+        return;
+    }
+    
+    int row = indexPath.row - [VPPDropDown tableView:tableView numberOfExpandedRowsInSection:indexPath.section];
     UIAlertView *av;
     switch (indexPath.section) {
         case kSection1:
-            if ([_dropDownSelection containsRelativeIndexPath:indexPath]) {
-                [_dropDownSelection didSelectRowAtRelativeIndexPath:indexPath globalIndexPath:indexPath];
-            }  
-            else if ([_dropDownDisclosure containsRelativeIndexPath:[NSIndexPath indexPathForRow:indexPath.row-[_dropDownSelection numberOfRows] inSection:indexPath.section]]) {
-                [_dropDownDisclosure didSelectRowAtRelativeIndexPath:[NSIndexPath indexPathForRow:indexPath.row-[_dropDownSelection numberOfRows] inSection:indexPath.section] 
-                                                     globalIndexPath:indexPath];
-            }
-            
-            switch (indexPath.row-[_dropDownSelection numberOfRows]-[_dropDownDisclosure numberOfRows]) {
+            switch (row) {
                 case kRow1:
                     av = [[UIAlertView alloc] initWithTitle:@"Cell selected" message:@"The independent cell 1 has been selected" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [av show];
@@ -311,11 +310,7 @@ enum {
             break;
             
         case kSection2:
-            if ([_dropDownCustom containsRelativeIndexPath:indexPath]) {
-                [_dropDownCustom didSelectRowAtRelativeIndexPath:indexPath globalIndexPath:indexPath];
-            }
-            
-            switch (indexPath.row - [_dropDownCustom numberOfRows]) {
+            switch (row) {
                 case kS2Row1:
                     av = [[UIAlertView alloc] initWithTitle:@"Cell selected" message:@"The independent cell 2 has been selected" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [av show];
