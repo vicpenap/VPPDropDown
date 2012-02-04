@@ -63,6 +63,17 @@
 	
 	
 	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/tableView:cellForRowAtIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;+ tableView:cellForRowAtIndexPath:</option>
+	
+	<option value="//api/name/tableView:didSelectRowAtIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;+ tableView:didSelectRowAtIndexPath:</option>
+	
+	<option value="//api/name/tableView:dropdownsContainIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;+ tableView:dropdownsContainIndexPath:</option>
+	
+	<option value="//api/name/tableView:numberOfExpandedRowsInSection:">&nbsp;&nbsp;&nbsp;&nbsp;+ tableView:numberOfExpandedRowsInSection:</option>
+	
+	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
@@ -141,6 +152,18 @@
 
 
 
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView:cellForRowAtIndexPath:">tableView:cellForRowAtIndexPath:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView:didSelectRowAtIndexPath:">tableView:didSelectRowAtIndexPath:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView:dropdownsContainIndexPath:">tableView:dropdownsContainIndexPath:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView:numberOfExpandedRowsInSection:">tableView:numberOfExpandedRowsInSection:</a></span></li>
+	
+</ul></li>
+
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
@@ -213,6 +236,9 @@ useful for editing preferences.</li>
 <p>You can mix different dropdowns in the same or different section.</p>
 
 <h3>Relative index path</h3>
+
+<p>If you are using any of the relative index path deprecated methods, you should read this.
+Otherwise, skip it.</p>
 
 <p>The concepts of relative index path and global index path are widely used in this library.
 Some method signatures require a relative index path, and some requires both index paths.</p>
@@ -361,31 +387,54 @@ globalIndexPath have the same value.</p></div>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/containsRelativeIndexPath:">&ndash;&nbsp;containsRelativeIndexPath:</a></code>
-		<span class="tooltip"><p>Indicates if the given relativeIndexPath is contained and managed by the
-dropdown</p></span>
+		<code><a href="#//api/name/tableView:dropdownsContainIndexPath:">+&nbsp;tableView:dropdownsContainIndexPath:</a></code>
+		<span class="tooltip"><p>Indicates if the given <a href="#//api/name/indexPath">indexPath</a> is contained in any dropdown associated with
+the given <a href="#//api/name/tableView">tableView</a>.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/isRootCellAtRelativeIndexPath:">&ndash;&nbsp;isRootCellAtRelativeIndexPath:</a></code>
-		<span class="tooltip"><p>Indicates if dropdown&rsquo;s root cell is placed in the given
-relativeIndexPath</p></span>
+		<code><a href="#//api/name/tableView:numberOfExpandedRowsInSection:">+&nbsp;tableView:numberOfExpandedRowsInSection:</a></code>
+		<span class="tooltip"><p>Returns the current number of <a href="#//api/name/expanded">expanded</a> cells for all dropdowns included in
+the given section of the given table.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/tableView:cellForRowAtIndexPath:">+&nbsp;tableView:cellForRowAtIndexPath:</a></code>
+		<span class="tooltip"><p>Returns the corresponding cell for the given parameters.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/numberOfRows">&nbsp;&nbsp;numberOfRows</a></code>
-		<span class="tooltip"><p>Indicates the visible number of rows.</p></span>
+		<span class="tooltip"><p>Indicates the dropdown&rsquo;s visible number of rows.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/containsRelativeIndexPath:">&ndash;&nbsp;containsRelativeIndexPath:</a></code>
+		<span class="tooltip"><p><strong>Deprecated</strong> Indicates if the given relativeIndexPath is contained and managed by the
+dropdown.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isRootCellAtRelativeIndexPath:">&ndash;&nbsp;isRootCellAtRelativeIndexPath:</a></code>
+		<span class="tooltip"><p><strong>Deprecated</strong> Indicates if dropdown&rsquo;s root cell is placed in the given
+relativeIndexPath</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/cellForRowAtRelativeIndexPath:globalIndexPath:">&ndash;&nbsp;cellForRowAtRelativeIndexPath:globalIndexPath:</a></code>
-		<span class="tooltip"><p>Returns the corresponding cell for the given parameters.</p></span>
+		<span class="tooltip"><p><strong>Deprecated</strong> Returns the corresponding cell for the given parameters.</p></span>
 	</span>
 	
 	
@@ -399,8 +448,15 @@ relativeIndexPath</p></span>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
+		<code><a href="#//api/name/tableView:didSelectRowAtIndexPath:">+&nbsp;tableView:didSelectRowAtIndexPath:</a></code>
+		<span class="tooltip"><p>Indicates that the specified <a href="#//api/name/indexPath">indexPath</a> has been selected.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/didSelectRowAtRelativeIndexPath:globalIndexPath:">&ndash;&nbsp;didSelectRowAtRelativeIndexPath:globalIndexPath:</a></code>
-		<span class="tooltip"><p>Indicates the dropdown the corresponding cell for the given parameters
+		<span class="tooltip"><p><strong>Deprecated</strong> Indicates the dropdown the corresponding cell for the given parameters
 has been selected.</p></span>
 	</span>
 	
@@ -561,7 +617,7 @@ has been selected.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Indicates the visible number of rows.</p>
+		<p>Indicates the dropdown&rsquo;s visible number of rows.</p>
 	</div>		
 	
 	
@@ -794,6 +850,166 @@ by inserting/removing cells.</li>
 					
 					
 					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/tableView:cellForRowAtIndexPath:" title="tableView:cellForRowAtIndexPath:"></a>
+	<h3 class="subsubtitle method-title">tableView:cellForRowAtIndexPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the corresponding cell for the given parameters.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (UITableViewCell *)tableView:(UITableView *)<em>tableView</em> cellForRowAtIndexPath:(NSIndexPath *)<em>indexPath</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>LIbrary will automatically set up the cell according to the corresponding dropdown.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/tableView:didSelectRowAtIndexPath:" title="tableView:didSelectRowAtIndexPath:"></a>
+	<h3 class="subsubtitle method-title">tableView:didSelectRowAtIndexPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Indicates that the specified <a href="#//api/name/indexPath">indexPath</a> has been selected.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (void)tableView:(UITableView *)<em>tableView</em> didSelectRowAtIndexPath:(NSIndexPath *)<em>indexPath</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Library will automatically notify the dropdown containing the selected row.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/tableView:dropdownsContainIndexPath:" title="tableView:dropdownsContainIndexPath:"></a>
+	<h3 class="subsubtitle method-title">tableView:dropdownsContainIndexPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Indicates if the given <a href="#//api/name/indexPath">indexPath</a> is contained in any dropdown associated with
+the given <a href="#//api/name/tableView">tableView</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (BOOL)tableView:(UITableView *)<em>tableView</em> dropdownsContainIndexPath:(NSIndexPath *)<em>indexPath</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/tableView:numberOfExpandedRowsInSection:" title="tableView:numberOfExpandedRowsInSection:"></a>
+	<h3 class="subsubtitle method-title">tableView:numberOfExpandedRowsInSection:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the current number of <a href="#//api/name/expanded">expanded</a> cells for all dropdowns included in
+the given section of the given table.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSInteger)tableView:(UITableView *)<em>tableView</em> numberOfExpandedRowsInSection:(NSInteger)<em>section</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p><strong>Important</strong> the returned number doesn&rsquo;t take into account any root cell.</p><div class="warning"><p><strong>Example</strong> for a dropdown with three child rows, if the dropdown is
+<a href="#//api/name/expanded">expanded</a> the returned value will be three. Otherwise it will be zero.</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
 					
 					
 					<div class="section section-methods">
@@ -807,7 +1023,7 @@ by inserting/removing cells.</li>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Returns the corresponding cell for the given parameters.</p>
+		<p><strong>Deprecated</strong> Returns the corresponding cell for the given parameters.</p>
 	</div>		
 	
 	
@@ -819,6 +1035,11 @@ by inserting/removing cells.</li>
 	
 	
 	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="bug"><p><strong>Deprecated</strong> Use <a href="#//api/name/tableView:cellForRowAtIndexPath:">tableView:cellForRowAtIndexPath:</a> instead.</p></div>
+	</div>
 	
 	
 	
@@ -841,8 +1062,8 @@ by inserting/removing cells.</li>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Indicates if the given relativeIndexPath is contained and managed by the
-dropdown</p>
+		<p><strong>Deprecated</strong> Indicates if the given relativeIndexPath is contained and managed by the
+dropdown.</p>
 	</div>		
 	
 	
@@ -854,6 +1075,11 @@ dropdown</p>
 	
 	
 	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="bug"><p><strong>Deprecated</strong> Use <a href="#//api/name/tableView:dropdownsContainIndexPath:">tableView:dropdownsContainIndexPath:</a> instead.</p></div>
+	</div>
 	
 	
 	
@@ -876,7 +1102,7 @@ dropdown</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Indicates the dropdown the corresponding cell for the given parameters
+		<p><strong>Deprecated</strong> Indicates the dropdown the corresponding cell for the given parameters
 has been selected.</p>
 	</div>		
 	
@@ -1129,7 +1355,7 @@ useful for editing preferences.</li>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Indicates if dropdown&rsquo;s root cell is placed in the given
+		<p><strong>Deprecated</strong> Indicates if dropdown&rsquo;s root cell is placed in the given
 relativeIndexPath</p>
 	</div>		
 	
@@ -1170,7 +1396,7 @@ relativeIndexPath</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Víctor Pena Placer. All rights reserved. (Last updated: 2012-01-25)</span><br />
+						<p><span class="copyright">&copy; 2012 Víctor Pena Placer. All rights reserved. (Last updated: 2012-02-04)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 752)</a>.</span></p>
 						
