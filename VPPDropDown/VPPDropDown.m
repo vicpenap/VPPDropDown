@@ -303,6 +303,12 @@ static NSMutableDictionary *dropDowns = nil;
     return new;
 }
 
+
+- (BOOL) isRootCellAtIndexPath:(NSIndexPath *)indexPath {
+    return _globalRootIndexPath.section-indexPath.section == 0 
+    && _globalRootIndexPath.row-indexPath.row == 0;
+}
+
 - (UITableViewCell *) disclosureCellForRowAtIndexPath:(NSIndexPath *)globalIndexPath  {
     static NSString *SelectionCellIdentifier = @"VPPDropDownDisclosureCell";
     

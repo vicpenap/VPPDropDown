@@ -221,7 +221,6 @@ typedef enum {
  the given tableView. */
 + (BOOL) tableView:(UITableView *)tableView dropdownsContainIndexPath:(NSIndexPath *)indexPath;
 
-
 /** Returns the current number of expanded cells for all dropdowns included in 
  the given section of the given table.
  
@@ -236,6 +235,9 @@ typedef enum {
  
  LIbrary will automatically set up the cell according to the corresponding dropdown. */
 + (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+/** Indicates if dropdown's root cell is placed in the given indexPath. */
+- (BOOL) isRootCellAtIndexPath:(NSIndexPath *)indexPath;
 
 
 
