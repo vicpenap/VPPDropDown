@@ -34,10 +34,6 @@
  */
 static NSMutableDictionary *numberOfRows = nil;
 
-/* a dictionary of dropdowns (keys) and the number of cells opened of the 
- previous dropdowns (value). */
-static NSMutableDictionary *previousOpenedCells = nil;
-
 /* a dictionary of tableviews (keys) and a dictionary of sections nsnumbered (values)
  each dictionary of sections will hold the section nsnumbered (key) and an array
  of dropdowns (value). */
@@ -45,6 +41,45 @@ static NSMutableDictionary *dropDowns = nil;
 
 
 #pragma mark - Managing dropDowns collection
+
++ (VPPDropDown *) tableView:(UITableView *)tableView dropdownForIndexPath:(NSIndexPath *)indexPath {
+    NSArray *dropDownsInSection = [[dropDowns objectForKey:[NSNumber numberWithInt:[tableView hash]]] 
+                                   objectForKey:[NSNumber numberWithInt:indexPath.section]];   
+    
+    for (VPPDropDown *dd in dropDownsInSection) {
+        if (indexPath.row > dd->_globalRootIndexPath.row + dd.numberOfRows) {
+            continue;
+        }
+        return dd;
+    }
+    
+    return nil;
+}
+
+- (void) updateGlobalIndexPaths {
+    NSArray *dropDownsInSection = [[dropDowns objectForKey:[NSNumber numberWithInt:[self.tableView hash]]] 
+                                   objectForKey:[NSNumber numberWithInt:self.indexPath.section]];
+    
+    int selfPosition = [dropDownsInSection indexOfObject:self];
+    
+    if (selfPosition == [dropDownsInSection count]-1) {
+        // this dropdown is the last one, so any dropdown will be modified
+        // no matter the status of this one.
+        return;
+    }
+    
+    int numberOfCells = [self.elements count];
+    if (!self.expanded) {
+        numberOfCells = numberOfCells * (-1);
+    }
+    for (int i = selfPosition+1; i < [dropDownsInSection count]; i++) {
+        VPPDropDown *selectedDD = (VPPDropDown *)[dropDownsInSection objectAtIndex:i];
+        NSIndexPath *currentRelIP = selectedDD->_globalRootIndexPath;
+        NSIndexPath *newRelIP = [NSIndexPath indexPathForRow:currentRelIP.row+numberOfCells inSection:currentRelIP.section];
+        [selectedDD->_globalRootIndexPath release];
+        selectedDD->_globalRootIndexPath = [newRelIP retain];
+    }
+}
 
 + (void) addNumberOfRows:(int)nnumberOfRows forSection:(int)section inTableView:(UITableView *)tableView {
     if (!numberOfRows) {
@@ -66,24 +101,28 @@ static NSMutableDictionary *dropDowns = nil;
     [numberOfRows setObject:sections forKey:[NSNumber numberWithInt:[tableView hash]]];
 }
 
-+ (void) addDropDown:(VPPDropDown *)dropdown {
+- (void) addToDropDownsList {
     if (!dropDowns) {
         dropDowns = [[NSMutableDictionary alloc] init]; 
     }
     
-    NSMutableDictionary *sections = [dropDowns objectForKey:[NSNumber numberWithInt:[dropdown.tableView hash]]];
+    NSMutableDictionary *sections = [dropDowns objectForKey:[NSNumber numberWithInt:[self.tableView hash]]];
     if (!sections) {
         sections = [NSMutableDictionary dictionary];
     }
-    NSMutableArray *dropdowns = [sections objectForKey:[NSNumber numberWithInt:dropdown.indexPath.section]];
+    NSMutableArray *dropdowns = [NSMutableArray arrayWithArray:
+                                 [sections objectForKey:[NSNumber numberWithInt:self.indexPath.section]]];
     if (!dropdowns) {
         dropdowns = [NSMutableArray array];
     }
-    if (![dropdowns containsObject:dropdown]) {
-        [dropdowns addObject:dropdown];
+    if (![dropdowns containsObject:self]) {
+        [dropdowns addObject:self];
         
-        [sections setObject:dropdowns forKey:[NSNumber numberWithInt:dropdown.indexPath.section]];
-        [dropDowns setObject:sections forKey:[NSNumber numberWithInt:[dropdown.tableView hash]]];
+        [sections setObject:[dropdowns sortedArrayUsingDescriptors:
+                             [NSArray arrayWithObject:
+                              [NSSortDescriptor sortDescriptorWithKey:@"indexPath.row" ascending:YES]]] 
+                     forKey:[NSNumber numberWithInt:self.indexPath.section]];
+        [dropDowns setObject:sections forKey:[NSNumber numberWithInt:[self.tableView hash]]];
         
 //        [VPPDropDown addNumberOfRows:1 forSection:dropdown.indexPath.section inTableView:dropdown.tableView];
     }
@@ -127,9 +166,10 @@ static NSMutableDictionary *dropDowns = nil;
         _elements = [elements retain];
         _delegate = [delegate retain];
         _rootIndexPath = [indexPath retain];
+        _globalRootIndexPath = [indexPath retain];
         _tableView = [tableView retain];
         
-        [VPPDropDown addDropDown:self];
+        [self addToDropDownsList];
     }
     
     return self;
@@ -153,6 +193,10 @@ static NSMutableDictionary *dropDowns = nil;
     if (_rootIndexPath != nil) {
         [_rootIndexPath release];
         _rootIndexPath = nil;
+    }
+    if (_globalRootIndexPath != nil) {
+        [_globalRootIndexPath release];
+        _globalRootIndexPath = nil;
     }
     if (_tableView != nil) {
         [_tableView release];
@@ -235,6 +279,240 @@ static NSMutableDictionary *dropDowns = nil;
 #pragma mark -
 #pragma mark Query methods
 
+
+
+#pragma mark -
+#pragma mark Table View Data Source
+
++ (BOOL) tableView:(UITableView *)tableView dropdownsContainIndexPath:(NSIndexPath *)indexPath {
+    NSArray *dropDownsInSection = [[dropDowns objectForKey:[NSNumber numberWithInt:[tableView hash]]] 
+                                   objectForKey:[NSNumber numberWithInt:indexPath.section]];
+    if (!dropDownsInSection) {
+        return NO;
+    }
+    
+    int numberOfRowsInSection = [VPPDropDown tableView:tableView numberOfExpandedRowsInSection:indexPath.section];
+    numberOfRowsInSection += [dropDownsInSection count];
+    NSIndexPath *firstIndexPath = [[dropDownsInSection objectAtIndex:0] indexPath];
+    return (firstIndexPath.row + numberOfRowsInSection > indexPath.row);
+}
+
+- (NSIndexPath *) convertIndexPath:(NSIndexPath *)indexPath {
+    NSIndexPath *new = [NSIndexPath indexPathForRow:indexPath.row-_globalRootIndexPath.row inSection:_globalRootIndexPath.section];
+    
+    return new;
+}
+
+- (UITableViewCell *) disclosureCellForRowAtIndexPath:(NSIndexPath *)globalIndexPath  {
+    static NSString *SelectionCellIdentifier = @"VPPDropDownDisclosureCell";
+    
+    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:SelectionCellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SelectionCellIdentifier] autorelease];
+    }
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.textLabel.text = nil;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.textLabel.textColor = [UIColor darkTextColor];    
+    cell.accessoryView = nil;
+    cell.detailTextLabel.text = nil;
+    cell.textLabel.textColor = [UIColor darkTextColor];
+    
+    NSIndexPath *iPath = [self convertIndexPath:globalIndexPath];
+    
+    if (iPath.row == 0) {
+        cell.textLabel.text = _title;
+        if (_expanded) {
+            UIImageView *imView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableContract"]];
+            cell.accessoryView = imView;
+            [imView release];
+            cell.textLabel.textColor = [VPPDropDown detailColor];
+        }
+        else {
+            UIImageView *imView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableExpand"]];
+            cell.accessoryView = imView;
+            [imView release];            
+        }
+        
+    }
+    else {
+        VPPDropDownElement *elt = (VPPDropDownElement*)[_elements objectAtIndex:iPath.row-1]; // -1 because options cells start in 1 (0 is root cell)
+        cell.textLabel.text = elt.title;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    return cell;
+}
+
+- (UITableViewCell *) selectionCellForRowAtIndexPath:(NSIndexPath *)globalIndexPath  {
+    static NSString *SelectionCellIdentifier = @"VPPDropDownSelectionCell";
+    
+    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:SelectionCellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SelectionCellIdentifier] autorelease];
+    }
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.textLabel.text = nil;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.textLabel.textColor = [UIColor darkTextColor];    
+    cell.accessoryView = nil;
+    cell.detailTextLabel.text = nil;
+    cell.textLabel.textColor = [UIColor darkTextColor];
+    
+    NSIndexPath *iPath = [self convertIndexPath:globalIndexPath];
+    
+    if (iPath.row == 0) {
+        cell.textLabel.text = _title;
+        if (_expanded) {
+            UIImageView *imView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableContract"]];
+            cell.accessoryView = imView;
+            [imView release];
+            cell.textLabel.textColor = [VPPDropDown detailColor];
+        }
+        else {
+            cell.detailTextLabel.text = [(VPPDropDownElement*)[_elements objectAtIndex:_selectedIndex] title];            
+            UIImageView *imView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableExpand"]];
+            cell.accessoryView = imView;
+            [imView release];            
+        }
+        
+    }
+    else {
+        VPPDropDownElement *elt = (VPPDropDownElement*)[_elements objectAtIndex:iPath.row-1]; // -1 because options cells start in 1 (0 is root cell)
+        cell.textLabel.text = elt.title;
+        if (_selectedIndex == iPath.row-1) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            cell.textLabel.textColor = [VPPDropDown detailColor];
+        }
+    }
+    
+    return cell;
+}
+
+
+- (UITableViewCell *) customCellForRowAtIndexPath:(NSIndexPath *)globalIndexPath {
+    NSIndexPath *iPath = [self convertIndexPath:globalIndexPath];
+    
+    UITableViewCell *cell = nil;
+    if (iPath.row == 0) {
+        cell = [_delegate dropDown:self rootCellAtGlobalIndexPath:globalIndexPath];
+        
+    }
+    else {
+        cell = [_delegate dropDown:self cellForElement:(VPPDropDownElement*)[_elements objectAtIndex:iPath.row-1] atGlobalIndexPath:globalIndexPath];
+    }
+    
+    // if user doesn't return a customized cell, we'll create a basic one
+    if (cell == nil) {
+        cell = [self disclosureCellForRowAtIndexPath:globalIndexPath];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    if (iPath.row == 0) {
+        if (_expanded) {
+            UIImageView *imView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableContract"]];
+            cell.accessoryView = imView;
+            [imView release];
+        }
+        else {
+            UIImageView *imView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableExpand"]];
+            cell.accessoryView = imView;
+            [imView release];            
+        }
+        
+    }
+    
+    return cell;
+}
+
+
+// PAY ATTENTION: numberOfRows doesn't include the root cell in the count.
++ (NSInteger) tableView:(UITableView *)tableView numberOfExpandedRowsInSection:(NSInteger)section {
+    NSMutableDictionary *d = [numberOfRows objectForKey:[NSNumber numberWithInt:[tableView hash]]];
+    NSNumber *n = [d objectForKey:[NSNumber numberWithInt:section]];
+    
+    return [n intValue];
+}
+
+
+- (int) numberOfRows {
+    int tmp = 0; // root cell is not counted
+    if (_expanded) {
+        tmp += [_elements count];
+    }
+    
+    return tmp;
+}
+
+
++ (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (![VPPDropDown tableView:tableView dropdownsContainIndexPath:indexPath]) {
+        NSLog(@"VPPDropDown - Receveing actions about an unknown cell");
+        return nil;
+    }
+    
+    VPPDropDown *dd = [VPPDropDown tableView:tableView dropdownForIndexPath:indexPath];
+    switch (dd->_type) {
+        case VPPDropDownTypeDisclosure:
+            return [dd disclosureCellForRowAtIndexPath:indexPath];
+            
+        case VPPDropDownTypeSelection:
+            return [dd selectionCellForRowAtIndexPath:indexPath];
+            
+        case VPPDropDownTypeCustom:
+            return [dd customCellForRowAtIndexPath:indexPath];
+    }
+    
+    return nil;
+}
+
+
+
+#pragma mark -
+#pragma mark Table View Delegate
+
+- (void) toggleDropDown {
+    _expanded = !_expanded;
+
+    int rowsToAdd = [self.elements count];
+    if (!_expanded) {
+        rowsToAdd = -1 * rowsToAdd;
+    }
+    [VPPDropDown addNumberOfRows:rowsToAdd forSection:self.indexPath.section inTableView:self.tableView];
+    [self updateGlobalIndexPaths];
+
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    for (int i = 1; i <= [_elements count]; i++) {
+        NSIndexPath *ip = [NSIndexPath indexPathForRow:_rootIndexPath.row+i inSection:_rootIndexPath.section];
+        [indexPaths addObject:ip];
+    }
+    
+    if (self.usesEntireSection) {
+        // we can add or remove the cells as we manage the entire section
+        if (_expanded) {
+            // table view insert rows
+            [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        }
+        
+        else {
+            // table view remove rows
+            [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];        
+        }
+        
+        [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:_rootIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+
+    else {
+        // as we dont manage the section, just refresh it, no additions or removals
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:_rootIndexPath.section];
+        [_tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+
+
+#pragma mark - Deprecated methods
+
 - (BOOL) containsRelativeIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section != _rootIndexPath.section) {
         return NO;
@@ -244,7 +522,7 @@ static NSMutableDictionary *dropDowns = nil;
     return (tmp >= 0) && (tmp <= [self numberOfRows]);
 }
 
-- (NSIndexPath *) convertIndexPath:(NSIndexPath *)indexPath {
+- (NSIndexPath *) convertRelativeIndexPath:(NSIndexPath *)indexPath {
     if (![self containsRelativeIndexPath:indexPath]) {
         return nil;
     }
@@ -256,33 +534,13 @@ static NSMutableDictionary *dropDowns = nil;
 
 
 - (BOOL) isRootCellAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath {
-    NSIndexPath *converted = [self convertIndexPath:relativeIndexPath];
+    NSIndexPath *converted = [self convertRelativeIndexPath:relativeIndexPath];
     
     if (!converted) {
         return NO;
     }
     
     return converted.row == 0;
-}
-
-#pragma mark -
-#pragma mark Table View Data Source
-
-// PAY ATTENTION: numberOfRows doesn't include the root cell in the count.
-+ (NSInteger)tableView:(UITableView *)tableView numberOfExpandedRowsInSection:(NSInteger)section {
-    NSMutableDictionary *d = [numberOfRows objectForKey:[NSNumber numberWithInt:[tableView hash]]];
-    NSNumber *n = [d objectForKey:[NSNumber numberWithInt:section]];
-    
-    return [n intValue];
-}
-
-- (int) numberOfRows {
-    int tmp = 0; // root cell is not counted
-    if (_expanded) {
-        tmp += [_elements count];
-    }
-    
-    return tmp;
 }
 
 - (UITableViewCell *) disclosureCellForRowAtRelativeIndexPath:(NSIndexPath *)indexPath globalIndexPath:(NSIndexPath *)globalIndexPath  {
@@ -300,7 +558,7 @@ static NSMutableDictionary *dropDowns = nil;
     cell.detailTextLabel.text = nil;
     cell.textLabel.textColor = [UIColor darkTextColor];
     
-    NSIndexPath *iPath = [self convertIndexPath:indexPath];
+    NSIndexPath *iPath = [self convertRelativeIndexPath:indexPath];
     
     if (iPath.row == 0) {
         cell.textLabel.text = _title;
@@ -341,7 +599,7 @@ static NSMutableDictionary *dropDowns = nil;
     cell.detailTextLabel.text = nil;
     cell.textLabel.textColor = [UIColor darkTextColor];
     
-    NSIndexPath *iPath = [self convertIndexPath:indexPath];
+    NSIndexPath *iPath = [self convertRelativeIndexPath:indexPath];
     
     if (iPath.row == 0) {
         cell.textLabel.text = _title;
@@ -357,7 +615,7 @@ static NSMutableDictionary *dropDowns = nil;
             cell.accessoryView = imView;
             [imView release];            
         }
-                                
+        
     }
     else {
         VPPDropDownElement *elt = (VPPDropDownElement*)[_elements objectAtIndex:iPath.row-1]; // -1 because options cells start in 1 (0 is root cell)
@@ -373,7 +631,7 @@ static NSMutableDictionary *dropDowns = nil;
 
 
 - (UITableViewCell *) customCellForRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath globalIndexPath:(NSIndexPath *)globalIndexPath {
-    NSIndexPath *iPath = [self convertIndexPath:relativeIndexPath];
+    NSIndexPath *iPath = [self convertRelativeIndexPath:relativeIndexPath];
     
     UITableViewCell *cell = nil;
     if (iPath.row == 0) {
@@ -389,7 +647,7 @@ static NSMutableDictionary *dropDowns = nil;
         cell = [self disclosureCellForRowAtRelativeIndexPath:relativeIndexPath globalIndexPath:globalIndexPath];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-        
+    
     if (iPath.row == 0) {
         if (_expanded) {
             UIImageView *imView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableContract"]];
@@ -418,10 +676,10 @@ static NSMutableDictionary *dropDowns = nil;
     switch (_type) {
         case VPPDropDownTypeDisclosure:
             return [self disclosureCellForRowAtRelativeIndexPath:indexPath globalIndexPath:globalIndexPath];
-
+            
         case VPPDropDownTypeSelection:
             return [self selectionCellForRowAtRelativeIndexPath:indexPath globalIndexPath:globalIndexPath];
-
+            
         case VPPDropDownTypeCustom:
             return [self customCellForRowAtRelativeIndexPath:indexPath globalIndexPath:globalIndexPath];
     }
@@ -430,58 +688,17 @@ static NSMutableDictionary *dropDowns = nil;
 }
 
 
-#pragma mark -
-#pragma mark Table View Delegate
-
-- (void) toggleDropDown {
-    _expanded = !_expanded;
-
-    int rowsToAdd = [self.elements count];
-    if (!_expanded) {
-        rowsToAdd = -1 * rowsToAdd;
-    }
-    [VPPDropDown addNumberOfRows:rowsToAdd forSection:self.indexPath.section inTableView:self.tableView];
-
-
-    NSMutableArray *indexPaths = [NSMutableArray array];
-    for (int i = 1; i <= [_elements count]; i++) {
-        NSIndexPath *ip = [NSIndexPath indexPathForRow:_rootIndexPath.row+i inSection:_rootIndexPath.section];
-        [indexPaths addObject:ip];
-    }
-    
-    if (self.usesEntireSection) {
-        // we can add or remove the cells as we manage the entire section
-        if (_expanded) {
-            // table view insert rows
-            [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-        }
-        
-        else {
-            // table view remove rows
-            [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];        
-        }
-        
-        [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:_rootIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-
-    else {
-        // as we dont manage the section, just refresh it, no additions or removals
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:_rootIndexPath.section];
-        [_tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-    }
-}
-
 - (void) disclosureDidSelectRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath globalIndexPath:(NSIndexPath *)globalIndexPath {
-    NSIndexPath *iPath = [self convertIndexPath:relativeIndexPath];
-        
+    NSIndexPath *iPath = [self convertRelativeIndexPath:relativeIndexPath];
+    
     // delegate would do whatever it wants: change nspreference, ...
     [_delegate dropDown:self elementSelected:[_elements objectAtIndex:iPath.row-1] atGlobalIndexPath:globalIndexPath];
 }
 
 - (void) selectionDidSelectRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath globalIndexPath:(NSIndexPath *)globalIndexPath {
-    NSIndexPath *iPath = [self convertIndexPath:relativeIndexPath];
+    NSIndexPath *iPath = [self convertRelativeIndexPath:relativeIndexPath];
     NSIndexPath *previousSelectedItem = [NSIndexPath indexPathForRow:_selectedIndex+1 inSection:relativeIndexPath.section];
-
+    
     _selectedIndex = iPath.row-1;
     
     // delegate would do whatever it wants: change nspreference, ...
@@ -495,7 +712,7 @@ static NSMutableDictionary *dropDowns = nil;
 - (void) didSelectRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath
                          globalIndexPath:(NSIndexPath *)globalIndexPath {
     if ([self containsRelativeIndexPath:relativeIndexPath]) {
-        if ([self convertIndexPath:relativeIndexPath].row == 0) {
+        if ([self convertRelativeIndexPath:relativeIndexPath].row == 0) {
             // we are on root cell
             [self toggleDropDown];
         }
@@ -518,6 +735,8 @@ static NSMutableDictionary *dropDowns = nil;
         NSLog(@"VPPDropDown - Receveing actions about an unknown cell");
     }
 }
+
+
 
 
 @end

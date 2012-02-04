@@ -17,10 +17,10 @@ enum {
 
 
 // including the dropdown cell !!
-/* set to 2 if you want to see how it behaves 
+/* set to 3 if you want to see how it behaves 
  when having more cells in the same section 
  */
-#define kNumberOfRowsInSection1 2 
+#define kNumberOfRowsInSection1 3 
 
 enum {
     kRowDropDownSelection = 0,
@@ -183,8 +183,10 @@ enum {
     switch (section) {
         case kSection1:
             rows += kNumberOfRowsInSection1;
+            break;
         case kSection2:
             rows += kNumberOfRowsInSection2;
+            break;
             
     }
     return rows;
@@ -203,36 +205,25 @@ enum {
     // Configure the cell...
     cell.textLabel.text = nil;
 
+    if ([VPPDropDown tableView:tableView dropdownsContainIndexPath:indexPath]) {
+        return [VPPDropDown tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
     
     // first check if any dropdown contains the requested cell
+    int row = indexPath.row - [VPPDropDown tableView:tableView numberOfExpandedRowsInSection:indexPath.section];
     switch (indexPath.section) {
         case kSection1:
-            if ([_dropDownSelection containsRelativeIndexPath:indexPath]) {
-                return [_dropDownSelection cellForRowAtRelativeIndexPath:indexPath globalIndexPath:indexPath];
-            }  
-            else if ([_dropDownDisclosure containsRelativeIndexPath:[NSIndexPath indexPathForRow:indexPath.row-[_dropDownSelection numberOfRows] inSection:indexPath.section]]) {
-                return [_dropDownDisclosure cellForRowAtRelativeIndexPath:[NSIndexPath indexPathForRow:indexPath.row-[_dropDownSelection numberOfRows] inSection:indexPath.section] 
-                                                          globalIndexPath:indexPath];
-            }
-            else {
-                switch (indexPath.row-[_dropDownSelection numberOfRows]-[_dropDownDisclosure numberOfRows]) {
-                    case kRow1:
-                        cell.textLabel.text = @"This is an independent cell";
-                        break;
-                }               
+            switch (row) {
+                case kRow1:
+                    cell.textLabel.text = @"This is an independent cell";
+                    break;
             }
             break;
-            
         case kSection2:
-            if ([_dropDownCustom containsRelativeIndexPath:indexPath]) {
-                return [_dropDownCustom cellForRowAtRelativeIndexPath:indexPath globalIndexPath:indexPath];
-            }
-            else {
-                switch (indexPath.row-[_dropDownCustom numberOfRows]) {
-                    case kS2Row1:
-                        cell.textLabel.text = @"This is an independent cell";
-                        break;
-                }                 
+            switch (row) {
+                case kS2Row1:
+                    cell.textLabel.text = @"This is an independent cell";
+                    break;
             }
             break;
     }
