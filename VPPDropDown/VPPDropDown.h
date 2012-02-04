@@ -239,6 +239,9 @@ typedef enum {
 /** Indicates if dropdown's root cell is placed in the given indexPath. */
 - (BOOL) isRootCellAtIndexPath:(NSIndexPath *)indexPath;
 
+/** Returns YES if the given indexPath is root for any dropdown. Otherwise 
+returns NO. */
++ (BOOL) tableView:(UITableView *)tableView isRootCellAtIndexPath:(NSIndexPath *)indexPath;
 
 
 /** Indicates the dropdown's visible number of rows. 

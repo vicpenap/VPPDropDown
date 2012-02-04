@@ -309,6 +309,17 @@ static NSMutableDictionary *dropDowns = nil;
     && _globalRootIndexPath.row-indexPath.row == 0;
 }
 
++ (BOOL) tableView:(UITableView *)tableView isRootCellAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *dropdownsInSection = [[dropDowns objectForKey:[NSNumber numberWithInt:[tableView hash]]] 
+                                   objectForKey:[NSNumber numberWithInt:indexPath.section]];
+    
+    dropdownsInSection = [dropdownsInSection filteredArrayUsingPredicate:
+                          [NSPredicate predicateWithFormat:@"_globalRootIndexPath.row == %d",indexPath.row]];
+    
+    return [dropdownsInSection count] == 1;
+}
+
+
 - (UITableViewCell *) disclosureCellForRowAtIndexPath:(NSIndexPath *)globalIndexPath  {
     static NSString *SelectionCellIdentifier = @"VPPDropDownDisclosureCell";
     
