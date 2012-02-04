@@ -255,7 +255,9 @@ typedef enum {
 - (BOOL) containsRelativeIndexPath:(NSIndexPath *)relativeIndexPath __attribute__ ((deprecated));
 
 /** **Deprecated** Indicates if dropdown's root cell is placed in the given
- relativeIndexPath */
+ relativeIndexPath.
+
+ @bug **Deprecated** Use isRootCellAtIndexPath: instead. */
 - (BOOL) isRootCellAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath __attribute__ ((deprecated));
 
 /** 
