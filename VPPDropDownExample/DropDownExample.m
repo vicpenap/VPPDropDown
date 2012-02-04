@@ -58,7 +58,7 @@ enum {
                                                                 tableView:self.tableView
                                                                 indexPath:[NSIndexPath indexPathForRow:kRowDropDownDisclosure inSection:kSection1] 
                                                                  delegate:self 
-                                                            elementTitles:@"Disclosure 1", @"Disclosure 2", @"Disclosure 3", nil];
+                                                            elementTitles:@"Disclosure 1", @"Disclosure 2", @"Disclosure 3", @"Disclosure 4", @"Disclosure 5", nil];
         
         
         NSMutableArray *elts = [NSMutableArray array];

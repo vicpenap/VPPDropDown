@@ -481,14 +481,14 @@ static NSMutableDictionary *dropDowns = nil;
     [VPPDropDown addNumberOfRows:rowsToAdd forSection:self.indexPath.section inTableView:self.tableView];
     [self updateGlobalIndexPaths];
 
-    NSMutableArray *indexPaths = [NSMutableArray array];
-    for (int i = 1; i <= [_elements count]; i++) {
-        NSIndexPath *ip = [NSIndexPath indexPathForRow:_rootIndexPath.row+i inSection:_rootIndexPath.section];
-        [indexPaths addObject:ip];
-    }
-    
     if (self.usesEntireSection) {
         // we can add or remove the cells as we manage the entire section
+        NSMutableArray *indexPaths = [NSMutableArray array];
+        for (int i = 1; i <= [_elements count]; i++) {
+            NSIndexPath *ip = [NSIndexPath indexPathForRow:_rootIndexPath.row+i inSection:_rootIndexPath.section];
+            [indexPaths addObject:ip];
+        }
+        
         if (_expanded) {
             // table view insert rows
             [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
@@ -506,6 +506,17 @@ static NSMutableDictionary *dropDowns = nil;
         // as we dont manage the section, just refresh it, no additions or removals
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:_rootIndexPath.section];
         [_tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+    }
+    
+    if (_expanded) {
+        // scroll to last cell if needed
+        NSIndexPath *lastRow = [NSIndexPath indexPathForRow:_globalRootIndexPath.row+[_elements count] inSection:_globalRootIndexPath.section];
+        UITableViewCell *lastVisibleCell = [self.tableView.visibleCells lastObject];
+        NSIndexPath *lastVisibleIndexPath = [self.tableView indexPathForCell:lastVisibleCell];
+        // lets scroll if only half of the cells are visible
+        if (lastVisibleIndexPath.section <= lastRow.section && lastVisibleIndexPath.row < lastRow.row) {
+            [self.tableView scrollToRowAtIndexPath:lastRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
     }
 }
 
