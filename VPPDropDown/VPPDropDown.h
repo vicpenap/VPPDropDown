@@ -36,6 +36,9 @@ typedef enum {
  
  ### Relative index path
  
+ If you are using any of the relative index path deprecated methods, you should read this. 
+ Otherwise, skip it.
+ 
  The concepts of relative index path and global index path are widely used in this library. 
  Some method signatures require a relative index path, and some requires both index paths.
  
@@ -62,6 +65,7 @@ typedef enum {
     id<VPPDropDownDelegate> _delegate;
     UITableView *_tableView;
     NSIndexPath *_rootIndexPath;
+    NSIndexPath *_globalRootIndexPath;
     BOOL _expanded;
     int _selectedIndex;
 }
@@ -213,24 +217,51 @@ typedef enum {
  @name Table view data source
  */
 
-
-/** Indicates if the given relativeIndexPath is contained and managed by the
- dropdown */
-- (BOOL) containsRelativeIndexPath:(NSIndexPath *)relativeIndexPath;
-
-/** Indicates if dropdown's root cell is placed in the given
- relativeIndexPath */
-- (BOOL) isRootCellAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath;
+/** Indicates if the given indexPath is contained in any dropdown associated with 
+ the given tableView. */
++ (BOOL) tableView:(UITableView *)tableView dropdownsContainIndexPath:(NSIndexPath *)indexPath;
 
 
-/** Indicates the visible number of rows. 
+/** Returns the current number of expanded cells for all dropdowns included in 
+ the given section of the given table.
+ 
+ **Important** the returned number doesn't take into account any root cell.
+ 
+ @warning **Example** for a dropdown with three child rows, if the dropdown is 
+ expanded the returned value will be three. Otherwise it will be zero.
+*/
++ (NSInteger) tableView:(UITableView *)tableView numberOfExpandedRowsInSection:(NSInteger)section;
+
+/** Returns the corresponding cell for the given parameters.
+ 
+ LIbrary will automatically set up the cell according to the corresponding dropdown. */
++ (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+
+
+/** Indicates the dropdown's visible number of rows. 
  
  If the dropdown is contracted, numberOfRows will be 0. Otherwise, 
  numberOfRows will be the count of elements. */
 @property (nonatomic, readonly) int numberOfRows;
 
-/** Returns the corresponding cell for the given parameters. */
-- (UITableViewCell *) cellForRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath globalIndexPath:(NSIndexPath *)globalIndexPath;
+    
+/** **Deprecated** Indicates if the given relativeIndexPath is contained and managed by the
+ dropdown.
+ 
+ @bug **Deprecated** Use tableView:dropdownsContainIndexPath: instead. */
+- (BOOL) containsRelativeIndexPath:(NSIndexPath *)relativeIndexPath __attribute__ ((deprecated));
+
+/** **Deprecated** Indicates if dropdown's root cell is placed in the given
+ relativeIndexPath */
+- (BOOL) isRootCellAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath __attribute__ ((deprecated));
+
+/** 
+ **Deprecated** Returns the corresponding cell for the given parameters. 
+ 
+ @bug **Deprecated** Use tableView:cellForRowAtIndexPath: instead.
+ */
+- (UITableViewCell *) cellForRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath globalIndexPath:(NSIndexPath *)globalIndexPath __attribute__ ((deprecated));
 
 
 
@@ -239,7 +270,13 @@ typedef enum {
  @name Table view delegate
  */
 
-/** Indicates the dropdown the corresponding cell for the given parameters 
+/** Indicates that the specified indexPath has been selected. 
+ 
+ Library will automatically notify the dropdown containing the selected row. */
++ (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+
+/** **Deprecated** Indicates the dropdown the corresponding cell for the given parameters 
  has been selected. */
 - (void) didSelectRowAtRelativeIndexPath:(NSIndexPath *)relativeIndexPath
                          globalIndexPath:(NSIndexPath *)globalIndexPath;
