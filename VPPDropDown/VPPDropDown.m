@@ -46,14 +46,9 @@ static NSMutableDictionary *dropDowns = nil;
     NSArray *dropDownsInSection = [[dropDowns objectForKey:[NSNumber numberWithInt:[tableView hash]]] 
                                    objectForKey:[NSNumber numberWithInt:indexPath.section]];   
     
-    for (VPPDropDown *dd in dropDownsInSection) {
-        if (indexPath.row > dd->_globalRootIndexPath.row + dd.numberOfRows) {
-            continue;
-        }
-        return dd;
-    }
-    
-    return nil;
+   return [[dropDownsInSection filteredArrayUsingPredicate:
+            [NSPredicate predicateWithFormat:@"_globalRootIndexPath.row <= %d",indexPath.row]] 
+           lastObject];
 }
 
 - (void) updateGlobalIndexPaths {
@@ -531,7 +526,7 @@ static NSMutableDictionary *dropDowns = nil;
         UITableViewCell *lastVisibleCell = [self.tableView.visibleCells lastObject];
         NSIndexPath *lastVisibleIndexPath = [self.tableView indexPathForCell:lastVisibleCell];
         // lets scroll if only half of the cells are visible
-        if (lastVisibleIndexPath.section <= lastRow.section && lastVisibleIndexPath.row < lastRow.row) {
+        if (lastVisibleIndexPath.section <= lastRow.section && lastVisibleIndexPath.row <= lastRow.row) {
             [self.tableView scrollToRowAtIndexPath:lastRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
     }
