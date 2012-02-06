@@ -42,5 +42,11 @@
     return self;
 }
 
+- (void) dealloc {
+    self.title = nil;
+    self.object = nil;
+    
+    [super dealloc];
+}
 
 @end
