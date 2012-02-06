@@ -95,7 +95,7 @@ Read the included example app for full information.
 
 ## License 
 
-Copyright (c) 2012 Víctor Pena Placer (@vicpenap)
+Copyright (c) 2012 Víctor Pena Placer ([@vicpenap](http://www.twitter.com/vicpenap))
 http://www.victorpena.es/
 
 
