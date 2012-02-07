@@ -57,6 +57,9 @@ typedef enum {
  
  You can mix different dropdowns in the same or different section.
  
+ Take into account that if you add multiple dropdowns in the same section, they must be 
+ together, so all cells between the first dropdown and the last one are managed by the library.
+ 
  ### Relative index path
  
  If you are using any of the relative index path deprecated methods, you should read this. 
