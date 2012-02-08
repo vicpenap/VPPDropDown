@@ -87,6 +87,9 @@ Read the included example app for full information.
 
 ## Changelog
 
+- 2012/02/08 (0.2.1)
+	- Fixed a bug when adding new dropdown to an indexPath that 
+was already used. 
 - 2012/02/04 (0.2.0)
 	- Added intelligent scrolling when expanding dropdowns.
 	- Deprecated all methods using relative index paths.
