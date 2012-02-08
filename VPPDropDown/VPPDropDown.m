@@ -360,7 +360,8 @@ static NSMutableDictionary *dropDowns = nil;
     int numberOfRowsInSection = [VPPDropDown tableView:tableView numberOfExpandedRowsInSection:indexPath.section];
     numberOfRowsInSection += [dropDownsInSection count];
     NSIndexPath *firstIndexPath = [[dropDownsInSection objectAtIndex:0] indexPath];
-    return (firstIndexPath.row + numberOfRowsInSection > indexPath.row);
+    return (indexPath.row >= firstIndexPath.row 
+            && indexPath.row < firstIndexPath.row + numberOfRowsInSection);
 }
 
 - (NSIndexPath *) convertIndexPath:(NSIndexPath *)indexPath {
