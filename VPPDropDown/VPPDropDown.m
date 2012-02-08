@@ -117,6 +117,43 @@ static NSMutableDictionary *dropDowns = nil;
     [numberOfRows setObject:sections forKey:[NSNumber numberWithInt:[tableView hash]]];
 }
 
+- (void) removeFromDropDownsList {
+    if (!dropDowns) {
+        return;
+    }
+    
+    NSMutableDictionary *sections = [dropDowns objectForKey:[NSNumber numberWithInt:[self.tableView hash]]];
+    if (!sections) {
+        return;
+    }
+    NSMutableArray *dropdowns = [NSMutableArray arrayWithArray:
+                                 [sections objectForKey:[NSNumber numberWithInt:self.indexPath.section]]];
+    if (!dropdowns) {
+        return;
+    }
+    if ([dropdowns containsObject:self]) {
+        [dropdowns removeObject:self];
+        
+        [sections setObject:[dropdowns sortedArrayUsingDescriptors:
+                             [NSArray arrayWithObject:
+                              [NSSortDescriptor sortDescriptorWithKey:@"indexPath.row" ascending:YES]]] 
+                     forKey:[NSNumber numberWithInt:self.indexPath.section]];
+        [dropDowns setObject:sections forKey:[NSNumber numberWithInt:[self.tableView hash]]];
+    }
+}
+
+
+- (void) dispose {
+    if (_expanded) {
+        int numberOfRows = self.numberOfRows * -1;
+        [VPPDropDown addNumberOfRows:numberOfRows forSection:self.indexPath.section inTableView:self.tableView];
+        _expanded = NO;
+        [self updateGlobalIndexPaths];
+    }
+    [self removeFromDropDownsList];
+}
+
+
 - (void) addToDropDownsList {
     if (!dropDowns) {
         dropDowns = [[NSMutableDictionary alloc] init]; 
@@ -131,18 +168,31 @@ static NSMutableDictionary *dropDowns = nil;
     if (!dropdowns) {
         dropdowns = [NSMutableArray array];
     }
-    if (![dropdowns containsObject:self]) {
-        [dropdowns addObject:self];
+    else {
+        // let's see if there's already a dropdown for the indexPath specified.
+        // if so, let's remove it.
+        NSArray *filteredDDs = [dropdowns filteredArrayUsingPredicate:
+                                [NSPredicate predicateWithFormat:@"indexPath.row == %d",self.indexPath.row]];
         
-        [sections setObject:[dropdowns sortedArrayUsingDescriptors:
-                             [NSArray arrayWithObject:
-                              [NSSortDescriptor sortDescriptorWithKey:@"indexPath.row" ascending:YES]]] 
-                     forKey:[NSNumber numberWithInt:self.indexPath.section]];
-        [dropDowns setObject:sections forKey:[NSNumber numberWithInt:[self.tableView hash]]];
-        
-//        [VPPDropDown addNumberOfRows:1 forSection:dropdown.indexPath.section inTableView:dropdown.tableView];
+        if ([filteredDDs count] != 0) {
+            VPPDropDown *dd = [filteredDDs objectAtIndex:0];
+            [dd dispose];
+            
+            // after removing the dd, let's update the list
+            dropdowns = [NSMutableArray arrayWithArray:
+                         [sections objectForKey:[NSNumber numberWithInt:self.indexPath.section]]];
+        }
     }
+    
+    [dropdowns addObject:self];
+    
+    [sections setObject:[dropdowns sortedArrayUsingDescriptors:
+                         [NSArray arrayWithObject:
+                          [NSSortDescriptor sortDescriptorWithKey:@"indexPath.row" ascending:YES]]] 
+                 forKey:[NSNumber numberWithInt:self.indexPath.section]];
+    [dropDowns setObject:sections forKey:[NSNumber numberWithInt:[self.tableView hash]]];
 }
+
 
 
 
