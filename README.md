@@ -1,4 +1,4 @@
-# VPPDropDown 0.2.2
+# VPPDropDown 0.3.0
 
 VPPDropDown is an iOS library that allows you to create dropdown-like menus
 in a table view, as seen in old Twitter 3 for iPhone. 
@@ -87,6 +87,11 @@ Read the included example app for full information.
 
 ## Changelog
 
+- 2012/02/08 (0.3.0)
+	- Added ability to modify some dropdown status' properties, 
+such as expanded or selectedIndex.
+	- Added height method to be able to change the row's height
+according to the associated dropdown's element.
 - 2012/02/08 (0.2.2)
 	- Fixed a bug that caused a crash when the first dropdown cell 
 was not the first cell on its section. 
