@@ -52,6 +52,8 @@
 	
 	<option value="//api/name/object">&nbsp;&nbsp;&nbsp;&nbsp;object</option>
 	
+	<option value="//api/name/selectedIndex">&nbsp;&nbsp;&nbsp;&nbsp;selectedIndex</option>
+	
 	<option value="//api/name/tableView">&nbsp;&nbsp;&nbsp;&nbsp;tableView</option>
 	
 	<option value="//api/name/title">&nbsp;&nbsp;&nbsp;&nbsp;title</option>
@@ -70,6 +72,8 @@
 	<option value="//api/name/tableView:didSelectRowAtIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;+ tableView:didSelectRowAtIndexPath:</option>
 	
 	<option value="//api/name/tableView:dropdownsContainIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;+ tableView:dropdownsContainIndexPath:</option>
+	
+	<option value="//api/name/tableView:heightForRowAtIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;+ tableView:heightForRowAtIndexPath:</option>
 	
 	<option value="//api/name/tableView:isRootCellAtIndexPath:">&nbsp;&nbsp;&nbsp;&nbsp;+ tableView:isRootCellAtIndexPath:</option>
 	
@@ -114,7 +118,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Reading dropdown setup">Reading dropdown setup</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Reading dropdown status">Reading dropdown status</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing dropdown status">Managing dropdown status</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Storing data">Storing data</a></span></li>
 	
@@ -144,6 +148,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/object">object</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/selectedIndex">selectedIndex</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView">tableView</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/title">title</a></span></li>
@@ -163,6 +169,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView:didSelectRowAtIndexPath:">tableView:didSelectRowAtIndexPath:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView:dropdownsContainIndexPath:">tableView:dropdownsContainIndexPath:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView:heightForRowAtIndexPath:">tableView:heightForRowAtIndexPath:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tableView:isRootCellAtIndexPath:">tableView:isRootCellAtIndexPath:</a></span></li>
 	
@@ -333,14 +341,21 @@ globalIndexPath have the same value.</p></div>
 						</ul>
 						
 						
-						<a title="Reading dropdown status" name="task_Reading dropdown status"></a>
-						<h3 class="subsubtitle task-title">Reading dropdown status</h3>
+						<a title="Managing dropdown status" name="task_Managing dropdown status"></a>
+						<h3 class="subsubtitle task-title">Managing dropdown status</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/expanded">&nbsp;&nbsp;expanded</a></code>
-		<span class="tooltip"><p>Indicates whether the dropdown is exanded or not.</p></span>
+		<span class="tooltip"><p>Specifies whether the dropdown is exanded or not.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/selectedIndex">&nbsp;&nbsp;selectedIndex</a></code>
+		<span class="tooltip"><p>Specifies the dropdown&rsquo;s selected index.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -474,6 +489,13 @@ relativeIndexPath.</p></span>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
+		<code><a href="#//api/name/tableView:heightForRowAtIndexPath:">+&nbsp;tableView:heightForRowAtIndexPath:</a></code>
+		<span class="tooltip"><p>Lets specify a custom height for the given index path.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/tableView:didSelectRowAtIndexPath:">+&nbsp;tableView:didSelectRowAtIndexPath:</a></code>
 		<span class="tooltip"><p>Indicates that the specified <a href="#//api/name/indexPath">indexPath</a> has been selected.</p></span>
 	</span>
@@ -575,11 +597,11 @@ has been selected.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Indicates whether the dropdown is exanded or not.</p>
+		<p>Specifies whether the dropdown is exanded or not.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, getter=isExpanded) BOOL expanded</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, getter=isExpanded) BOOL expanded</code></div>
 	
 	
 	
@@ -695,6 +717,46 @@ has been selected.</p></span>
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/selectedIndex" title="selectedIndex"></a>
+	<h3 class="subsubtitle method-title">selectedIndex</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Specifies the dropdown&rsquo;s selected index.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) int selectedIndex</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This property only applies to selection dropdowns. If you change this value
+manually, no dropdown delegate&rsquo;s method will be called.</p>
+	</div>
 	
 	
 	
@@ -978,6 +1040,48 @@ the given <a href="#//api/name/tableView">tableView</a>.</p>
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">VPPDropDown.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/tableView:heightForRowAtIndexPath:" title="tableView:heightForRowAtIndexPath:"></a>
+	<h3 class="subsubtitle method-title">tableView:heightForRowAtIndexPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Lets specify a custom height for the given index path.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (CGFloat)tableView:(UITableView *)<em>tableView</em> heightForRowAtIndexPath:(NSIndexPath *)<em>indexPath</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This method will automatically <a href="#//api/name/delegate">delegate</a> on the corresponding dropdown&rsquo;s <a href="#//api/name/delegate">delegate</a>.
+If it does not implement the method <code>dropDown:heightForElement:atIndexPath:</code>, <code></code>tableView<code>.rowHeight</code> will be returned, so
+you should call this only when the dropdown&rsquo;s <a href="#//api/name/delegate">delegate</a> is expected to return an
+height.</p>
+	</div>
 	
 	
 	
@@ -1496,7 +1600,7 @@ relativeIndexPath.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Víctor Pena Placer. All rights reserved. (Last updated: 2012-02-07)</span><br />
+						<p><span class="copyright">&copy; 2012 Víctor Pena Placer. All rights reserved. (Last updated: 2012-03-14)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 752)</a>.</span></p>
 						
