@@ -45,6 +45,7 @@
 @synthesize tableView=_tableView;
 @synthesize usesEntireSection;
 @synthesize object;
+@synthesize selectedIndex=_selectedIndex;
 
 
 /* a dictionary of tableviews (keys) and a dictionary of sections nsnumbered (values)
@@ -341,12 +342,6 @@ static NSMutableDictionary *dropDowns = nil;
     return dd;
 }
 
-
-#pragma mark -
-#pragma mark Query methods
-
-
-
 #pragma mark -
 #pragma mark Table View Data Source
 
@@ -531,7 +526,7 @@ static NSMutableDictionary *dropDowns = nil;
 
 + (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (![VPPDropDown tableView:tableView dropdownsContainIndexPath:indexPath]) {
-        NSLog(@"VPPDropDown - Receveing actions about an unknown cell");
+        NSLog(@"VPPDropDown - Receiving actions about an unknown cell");
         return nil;
     }
     
@@ -619,11 +614,12 @@ static NSMutableDictionary *dropDowns = nil;
     
     _selectedIndex = iPath.row-1;
     
-    // delegate would do whatever it wants: change nspreference, ...
-    [_delegate dropDown:self elementSelected:[_elements objectAtIndex:_selectedIndex] atGlobalIndexPath:globalIndexPath];
-    
     [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:previousSelectedItem, _rootIndexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
     [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:globalIndexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+    
+    
+    // delegate would do whatever it wants: change nspreference, ...
+    [_delegate dropDown:self elementSelected:[_elements objectAtIndex:_selectedIndex] atGlobalIndexPath:globalIndexPath];
 }
 
 
@@ -653,9 +649,54 @@ static NSMutableDictionary *dropDowns = nil;
     }
     
     else {
-        NSLog(@"VPPDropDown - Receveing actions about an unknown cell");
+        NSLog(@"VPPDropDown - Receiving actions about an unknown cell");
     }
 }
+
+
++ (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([VPPDropDown tableView:tableView dropdownsContainIndexPath:indexPath]) {
+        VPPDropDown *dd = [VPPDropDown tableView:tableView dropdownForIndexPath:indexPath];
+        NSIndexPath *iPath = [dd convertIndexPath:indexPath];
+
+        if ([dd.delegate respondsToSelector:@selector(dropDown:heightForElement:atIndexPath:)]) {
+            VPPDropDownElement *element = nil;
+            if (iPath.row > 0) {
+                element = [dd.elements objectAtIndex:iPath.row-1];
+            }
+            return [dd.delegate dropDown:dd heightForElement:element atIndexPath:indexPath];
+        }
+        else {
+            return tableView.rowHeight;
+        }
+    }
+    else {
+        NSLog(@"VPPDropDown - Receiving actions about an unknown cell");
+
+        return -1;
+    }
+}
+
+
+#pragma mark -
+#pragma mark Managing dropdown status
+
+- (void) setExpanded:(BOOL)expanded {
+    if (_expanded != expanded) {
+        [self toggleDropDown];
+    }
+}
+
+- (void) setSelectedIndex:(int)selectedIndex {
+    _selectedIndex = selectedIndex;
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:self.indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+
+
+
+
 
 
 #pragma mark - Deprecated methods
@@ -817,7 +858,7 @@ static NSMutableDictionary *dropDowns = nil;
 
 - (UITableViewCell *) cellForRowAtRelativeIndexPath:(NSIndexPath *)indexPath globalIndexPath:(NSIndexPath *)globalIndexPath  {
     if (![self containsRelativeIndexPath:indexPath]) {
-        NSLog(@"VPPDropDown - Receveing actions about an unknown cell");
+        NSLog(@"VPPDropDown - Receiving actions about an unknown cell");
         return nil;
     }
     
@@ -881,7 +922,7 @@ static NSMutableDictionary *dropDowns = nil;
     }
     
     else {
-        NSLog(@"VPPDropDown - Receveing actions about an unknown cell");
+        NSLog(@"VPPDropDown - Receiving actions about an unknown cell");
     }
 }
 

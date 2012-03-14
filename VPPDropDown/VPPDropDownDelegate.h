@@ -36,9 +36,7 @@
  
  - any dropdown child has been selected.
  - dropdown needs delegate cell customization.
- 
- While for the first case implementing the methods is mandatory, for the second
- case it is mandatory only in case you are using a custom drop down.
+ - dropdown needs row's height.
  */
 @protocol VPPDropDownDelegate <NSObject>
 
@@ -73,5 +71,18 @@
  customize it. In that case, the dropdown will automatically do it for you.
  */
 - (UITableViewCell *) dropDown:(VPPDropDown *)dropDown cellForElement:(VPPDropDownElement *)element atGlobalIndexPath:(NSIndexPath *)globalIndexPath;
+
+
+/** This method is called when the dropdown is asked about the row's height.
+ @param dropDown the involved dropdown.
+ @param element the involved element.
+ @param indexPath the tableView's involved indexPath.
+ @return the row's height.
+ 
+ If you do not implement this method, dropDown tableView's `rowHeight` property
+ will be returned instead.
+ */
+- (CGFloat) dropDown:(VPPDropDown *)dropDown heightForElement:(VPPDropDownElement *)element atIndexPath:(NSIndexPath *)indexPath;
+
 
 @end

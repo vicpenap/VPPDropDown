@@ -147,11 +147,17 @@ typedef enum {
 
 
 /** ---
- @name Reading dropdown status
+ @name Managing dropdown status
 */
 
 /** Indicates whether the dropdown is exanded or not. */
-@property (nonatomic, readonly, getter = isExpanded) BOOL expanded;
+@property (nonatomic, assign, getter = isExpanded) BOOL expanded;
+
+/** Indicates the dropdown's selected index. 
+ 
+ This property only applies to selection dropdowns. If you change this value
+ manually, no dropdown delegate's method will be called. */
+@property (nonatomic, assign) int selectedIndex;
 
 
 /** ---
@@ -302,6 +308,14 @@ returns NO. */
 /** ---
  @name Table view delegate
  */
+
+/** Lets specify a custom height for the given index path. 
+ 
+ This method will automatically delegate on the corresponding dropdown's delegate. 
+ If it does not implement the method, `tableView.rowHeight` will be returned, so
+ you should call it only when the dropdown's delegate is expected to return an 
+ height. */
++ (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /** Indicates that the specified indexPath has been selected. 
  

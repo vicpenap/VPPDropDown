@@ -160,7 +160,7 @@ enum {
     switch (indexPath.section) {
         case kSection2:
             if (indexPath.row > 0) {
-                return 50;
+                return [VPPDropDown tableView:tableView heightForRowAtIndexPath:indexPath];
             }
             
         default:
@@ -360,6 +360,12 @@ enum {
     return cell;
 }
 
+
+- (CGFloat) dropDown:(VPPDropDown *)dropDown heightForElement:(VPPDropDownElement *)element atIndexPath:(NSIndexPath *)indexPath {
+    float height = dropDown.tableView.rowHeight;
+    
+    return height + indexPath.row * 10;
+}
 
 
 #pragma mark - UIAlertViewDelegate
