@@ -547,6 +547,23 @@ static NSMutableDictionary *dropDowns = nil;
     return [n intValue];
 }
 
++ (NSInteger)tableView:(UITableView *)tableView numberOfExpandedRowsInSection:(NSInteger)section aboveRow:(NSInteger)row {
+    NSArray *dropDownsInSection = [[dropDowns objectForKey:[NSNumber numberWithInt:[tableView hash]]]
+                                   objectForKey:[NSNumber numberWithInt:section]];
+    if (!dropDownsInSection) {
+        return NO;
+    }
+
+    NSArray *filteredDDs = [dropDownsInSection filteredArrayUsingPredicate:
+                            [NSPredicate predicateWithFormat:@"indexPath.row < %d", row - 1]];
+    NSUInteger numOfExpendedRow = 0;
+    for (VPPDropDown *d in filteredDDs) {
+        if (d.isExpanded) {
+            numOfExpendedRow += d.numberOfRows;
+        }
+    }
+    return numOfExpendedRow;
+}
 
 - (int) numberOfRows {
     int tmp = 0; // root cell is not counted
