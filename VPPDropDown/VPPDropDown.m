@@ -662,6 +662,8 @@ static NSMutableDictionary *dropDowns = nil;
 - (void) selectionDidSelectRowAtIndexPath:(NSIndexPath *)globalIndexPath {
     NSIndexPath *iPath = [self convertIndexPath:globalIndexPath];
 
+    _selectedIndex = iPath.row - 1;
+
     NSMutableArray *reloadIndexPaths = [NSMutableArray array];
     for (int i = 0; i <= [_elements count]; i++) {
         NSIndexPath *path = [NSIndexPath indexPathForRow:_rootIndexPath.row + i
@@ -672,7 +674,6 @@ static NSMutableDictionary *dropDowns = nil;
     [_tableView reloadRowsAtIndexPaths:reloadIndexPaths withRowAnimation:UITableViewRowAnimationNone];
     [_tableView reloadRowsAtIndexPaths:@[globalIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 
-    _selectedIndex = iPath.row - 1;
     // delegate would do whatever it wants: change nspreference, ...
     [_delegate dropDown:self elementSelected:[_elements objectAtIndex:_selectedIndex] atGlobalIndexPath:globalIndexPath];
 }
