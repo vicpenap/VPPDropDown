@@ -8,11 +8,12 @@
 
 #import "DropDownExample.h"
 
-#define kNumberOfSections 2
+#define kNumberOfSections 3
 
 enum {
     kSection1 = 0,
-    kSection2
+    kSection2,
+    kSection3
 };
 
 
@@ -39,6 +40,10 @@ enum {
     kS2Row1
 };
 
+
+@interface DropDownExample ()
+@property(nonatomic, retain) NSArray *section3ItemList;
+@end
 
 @implementation DropDownExample
 
@@ -75,6 +80,25 @@ enum {
                                                   indexPath:[NSIndexPath indexPathForRow:kRowDropDownCustom inSection:kSection2]
                                                    elements:elts 
                                                    delegate:self];
+
+        self.section3ItemList = @[
+                @"item1", @"item2", @"item3", @"item4",
+                @"item5", @"item6", @"item7", @"item8"
+        ];
+        NSUInteger resolutionRow = 1;
+        [[[VPPDropDown alloc] initSelectionWithTitle:self.section3ItemList[resolutionRow]
+                                           tableView:self.tableView
+                                           indexPath:[NSIndexPath indexPathForRow:resolutionRow inSection:kSection3]
+                                            delegate:self
+                                       selectedIndex:1
+                                       elementTitles:[NSString stringWithFormat:@"%@-1", self.section3ItemList[resolutionRow]], [NSString stringWithFormat:@"%@-2", self.section3ItemList[resolutionRow]], nil] autorelease];
+        NSUInteger initializationRow = 5;
+        [[[VPPDropDown alloc] initDisclosureWithTitle:self.section3ItemList[initializationRow]
+                                            tableView:self.tableView
+                                            indexPath:[NSIndexPath indexPathForRow:initializationRow inSection:kSection3]
+                                             delegate:self
+                                        elementTitles:[NSString stringWithFormat:@"%@-1", self.section3ItemList[initializationRow]], [NSString stringWithFormat:@"%@-2", self.section3ItemList[initializationRow]], nil] autorelease];
+
     }
     return self;
 }
@@ -97,7 +121,8 @@ enum {
         [_dropDownCustom release];
         _dropDownCustom = nil;
     }
-    
+
+    self.section3ItemList = nil;
     [super dealloc];
 }
 - (void)didReceiveMemoryWarning
@@ -187,7 +212,9 @@ enum {
         case kSection2:
             rows += kNumberOfRowsInSection2;
             break;
-            
+        case kSection3:
+            return [self.section3ItemList count]
+                    + [VPPDropDown tableView:tableView numberOfExpandedRowsInSection:section];
     }
     return rows;
 }
@@ -226,6 +253,11 @@ enum {
                     break;
             }
             break;
+        case kSection3: {
+            NSUInteger r = (NSUInteger) (indexPath.row - [VPPDropDown tableView:tableView numberOfExpandedRowsInSection:indexPath.section aboveRow:indexPath.row]);
+            cell.textLabel.text = [self.section3ItemList objectAtIndex:r];
+            break;
+        }
     }
         
     return cell;
