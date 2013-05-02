@@ -352,11 +352,45 @@ static NSMutableDictionary *dropDowns = nil;
         return NO;
     }
     
-    int numberOfRowsInSection = [VPPDropDown tableView:tableView numberOfExpandedRowsInSection:indexPath.section];
-    numberOfRowsInSection += [dropDownsInSection count];
-    NSIndexPath *firstIndexPath = [[dropDownsInSection objectAtIndex:0] indexPath];
-    return (indexPath.row >= firstIndexPath.row 
-            && indexPath.row < firstIndexPath.row + numberOfRowsInSection);
+    // pick VPPDropDown, that is show above indexPath.row.
+    NSArray *filteredDDs = [dropDownsInSection filteredArrayUsingPredicate:
+                            [NSPredicate predicateWithFormat:@"indexPath.section == %d && indexPath.row <= %d",
+                             indexPath.section, indexPath.row]];
+    
+    // if no VPPDropDown, this cell is not VPPDropDown.
+    if ([filteredDDs count] <= 0) {
+        return NO;
+    }
+    
+    NSUInteger numOfExpendedRow = 0;
+    VPPDropDown *prevDD = nil;
+    for (VPPDropDown *d in filteredDDs) {
+        if (prevDD.isExpanded
+            && prevDD.indexPath.row <= d.indexPath.row
+            && d.indexPath.row <= prevDD.indexPath.row + prevDD.numberOfRows)
+        {
+            if (d.indexPath.row + numOfExpendedRow != indexPath.row) {
+                break;
+            }
+        }
+        prevDD = d;
+        if (d.isExpanded) {
+            numOfExpendedRow += d.numberOfRows;
+        }
+    }
+    
+    VPPDropDown *closelyDd = prevDD;
+    
+    NSInteger closelyDdExpandRow = closelyDd.isExpanded ? closelyDd.numberOfRows : 0;
+    NSInteger ddDiff = numOfExpendedRow - closelyDdExpandRow;
+    NSIndexPath *closelyDdIndexPath = [NSIndexPath indexPathForRow:closelyDd.indexPath.row + ddDiff
+                                                         inSection:closelyDd.indexPath.section];
+    if (numOfExpendedRow <= 0) {
+        return [indexPath compare:closelyDdIndexPath] == NSOrderedSame;
+    } else {
+        return (closelyDdIndexPath.row <= indexPath.row
+                && indexPath.row <= closelyDdIndexPath.row + closelyDdExpandRow);
+    }
 }
 
 - (NSIndexPath *) convertIndexPath:(NSIndexPath *)indexPath {
