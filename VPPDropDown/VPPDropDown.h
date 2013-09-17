@@ -263,6 +263,8 @@ typedef enum {
 */
 + (NSInteger) tableView:(UITableView *)tableView numberOfExpandedRowsInSection:(NSInteger)section;
 
++ (NSInteger)tableView:(UITableView *)tableView numberOfExpandedRowsInSection:(NSInteger)section aboveRow:(NSInteger)row;
+
 /** Returns the corresponding cell for the given parameters.
  
  LIbrary will automatically set up the cell according to the corresponding dropdown. */
